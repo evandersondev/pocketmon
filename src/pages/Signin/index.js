@@ -17,7 +17,7 @@ export default () => {
   const { navigate } = useNavigation()
 
   function handleFormSubmit() {
-    navigate('MainTabs')
+    navigate('PageTabs')
   }
 
   function createAccount() {
