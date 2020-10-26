@@ -9,8 +9,12 @@ export const Container = styled.SafeAreaView`
   padding: 0 30px;
 `
 
-export const LogoImage = styled.Image`
-  margin-bottom: 30px;
+export const TextMessage = styled.Text`
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Nunito_700Bold';
+  margin-bottom: 25px;
+  color: ${colors.dark};
 `
 
 export const Form = styled.View`
