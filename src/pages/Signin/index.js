@@ -16,9 +16,7 @@ import logotipo from '../../assets/images/logotipo.png'
 export default () => {
   const { navigate } = useNavigation()
 
-  function handleFormSubmit() {
-    navigate('PageTabs')
-  }
+  async function handleFormSubmit() {}
 
   function createAccount() {
     navigate('Signup')

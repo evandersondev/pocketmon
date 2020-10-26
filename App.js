@@ -7,7 +7,6 @@ import {
   useFonts,
 } from '@expo-google-fonts/nunito'
 import { AppLoading } from 'expo'
-
 import AppStack from './src/routes/AppStack'
 
 export default function App() {
