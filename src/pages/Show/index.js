@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Platform, StatusBar } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-community/async-storage'
+
 import { heightInCm, weightInKg } from '../../utils/convertMeasures'
+import { useModal } from '../../context/Modal'
+
+import { ProgressBar, Modal } from '../../components'
+
 import iconTypes from '../../utils/typeIcon'
-
-import { ProgressBar } from '../../components'
-
+import iconMark from '../../utils/iconMark'
 import BackIcon from '../../assets/images/icons/arrow.png'
-import MarkIcon from '../../assets/images/icons/check.png'
 
 import {
   ShowContainer,
@@ -37,78 +40,112 @@ import {
 export default () => {
   const { params } = useRoute()
   const { goBack } = useNavigation()
+  const { showModal } = useModal()
+
   const [pokemon, setPokemon] = useState({
     abilities: [],
   })
 
+  async function loadPokemon() {
+    const pokemonMarkedAs = await AsyncStorage.getItem('mark_pokemon')
+    const marked = JSON.parse(pokemonMarkedAs)
+
+    console.log(marked[params.id])
+
+    if (marked[params.id] !== undefined) {
+      setPokemon({
+        ...params,
+        markAs: marked[params.id].markAs,
+      })
+    } else {
+      setPokemon({ ...params, markAs: 'none' })
+    }
+  }
+
   useEffect(() => {
-    setPokemon(params)
-  }, [])
+    loadPokemon()
+  }, [pokemon.id])
 
   return (
-    <ShowContainer
-      style={{
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-      }}
-      typeColor={pokemon.type}
-    >
-      <HeaderShow>
-        <BackContainer onPress={goBack}>
-          <BackImage resizeMode="contain" source={BackIcon} />
-        </BackContainer>
+    <>
+      <Modal id={pokemon.id} />
 
-        <MarkContainer>
-          <MarkText>Mark as</MarkText>
-          <MarkImage resizeMode="contain" source={MarkIcon} />
-        </MarkContainer>
-      </HeaderShow>
+      {pokemon && (
+        <ShowContainer
+          style={{
+            paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+          }}
+          typeColor={pokemon.type}
+        >
+          <HeaderShow>
+            <BackContainer onPress={goBack}>
+              <BackImage resizeMode="contain" source={BackIcon} />
+            </BackContainer>
 
-      <ImageContainer>
-        <BackgroundContainer style={{ elevation: 1 }}>
-          <PokemonImage source={{ uri: params.image }} />
+            <MarkContainer onPress={showModal}>
+              <MarkText>Mark as</MarkText>
+              <MarkImage
+                resizeMode="contain"
+                source={iconMark[pokemon.markAs]}
+              />
+            </MarkContainer>
+          </HeaderShow>
 
-          <IdContainer>
-            <TextId>#{pokemon.id}</TextId>
-          </IdContainer>
+          <ImageContainer>
+            <BackgroundContainer style={{ elevation: 1 }}>
+              <PokemonImage source={{ uri: params.image }} />
 
-          <PokemonName>{pokemon.name}</PokemonName>
+              <IdContainer>
+                <TextId>#{pokemon.id}</TextId>
+              </IdContainer>
 
-          <TypeContainer>
-            <TypeImage resizeMode="contain" source={iconTypes[pokemon.type]} />
-            <TypeText>{pokemon.type}</TypeText>
-          </TypeContainer>
+              <PokemonName>{pokemon.name}</PokemonName>
 
-          <MeasuresContainer>
-            <MeasuresText>Weight: {weightInKg(pokemon.weight)}kg</MeasuresText>
-            <MeasuresText>Height: {heightInCm(pokemon.height)}cm</MeasuresText>
-          </MeasuresContainer>
-        </BackgroundContainer>
-      </ImageContainer>
+              <TypeContainer>
+                <TypeImage
+                  resizeMode="contain"
+                  source={iconTypes[pokemon.type]}
+                />
+                <TypeText>{pokemon.type}</TypeText>
+              </TypeContainer>
 
-      <StatsContainer>
-        <TitleSession>Stats</TitleSession>
-        <ProgressBar title="Hp" value={pokemon?.stats?.hp} />
-        <ProgressBar title="Attack" value={pokemon?.stats?.attack} />
-        <ProgressBar title="Defense" value={pokemon?.stats?.defense} />
-        <ProgressBar
-          title="Special Attack"
-          value={pokemon?.stats?.specialAttack}
-        />
-        <ProgressBar
-          title="Special defense"
-          value={pokemon?.stats?.specialDefense}
-        />
-        <ProgressBar title="Speed" value={pokemon?.stats?.speed} />
-      </StatsContainer>
+              <MeasuresContainer>
+                <MeasuresText>
+                  Weight: {weightInKg(pokemon.weight)}kg
+                </MeasuresText>
+                <MeasuresText>
+                  Height: {heightInCm(pokemon.height)}cm
+                </MeasuresText>
+              </MeasuresContainer>
+            </BackgroundContainer>
+          </ImageContainer>
 
-      <AbilitiesContainer>
-        <TitleSession>Abilities</TitleSession>
-        {pokemon?.abilities.map(({ ability }, index) => (
-          <AbilitiesItemText key={ability.name}>
-            {index + 1} - {ability.name}
-          </AbilitiesItemText>
-        ))}
-      </AbilitiesContainer>
-    </ShowContainer>
+          <StatsContainer>
+            <TitleSession>Stats</TitleSession>
+            <ProgressBar title="Hp" value={pokemon?.stats?.hp} />
+            <ProgressBar title="Attack" value={pokemon?.stats?.attack} />
+            <ProgressBar title="Defense" value={pokemon?.stats?.defense} />
+            <ProgressBar
+              title="Special Attack"
+              value={pokemon?.stats?.specialAttack}
+            />
+            <ProgressBar
+              title="Special defense"
+              value={pokemon?.stats?.specialDefense}
+            />
+            <ProgressBar title="Speed" value={pokemon?.stats?.speed} />
+          </StatsContainer>
+
+          <AbilitiesContainer>
+            <TitleSession>Abilities</TitleSession>
+            {pokemon?.abilities.map(({ ability }, index) => (
+              <AbilitiesItemText key={ability.name}>
+                {index + 1} - {ability.name}
+              </AbilitiesItemText>
+            ))}
+          </AbilitiesContainer>
+        </ShowContainer>
+      )}
+    </>
   )
 }

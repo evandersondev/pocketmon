@@ -39,6 +39,7 @@ export const MarkText = styled.Text`
 export const MarkImage = styled.Image`
   margin-left: 8px;
   height: 22px;
+  margin-top: 3px;
 `
 
 export const ImageContainer = styled.View`
@@ -92,8 +93,8 @@ export const PokemonName = styled.Text`
 `
 
 export const TypeContainer = styled.View`
-  width: 90px;
-  height: 40px;
+  width: 120px;
+  height: 50px;
   flex-direction: row;
   margin: auto;
   margin-top: 20px;
@@ -104,6 +105,7 @@ export const TypeContainer = styled.View`
 export const TypeImage = styled.Image`
   width: 20px;
   height: 20px;
+  margin-top: 5px;
 `
 export const TypeText = styled.Text`
   color: ${colors.dark};

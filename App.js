@@ -1,14 +1,16 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
+import { View } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+import { AppLoading } from 'expo'
 import {
   Nunito_400Regular,
   Nunito_700Bold,
   Nunito_800ExtraBold,
   useFonts,
 } from '@expo-google-fonts/nunito'
-import { AppLoading } from 'expo'
+
 import AppStack from './src/routes/AppStack'
-import { View } from 'react-native'
+import ModalProvider from './src/context/Modal'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,10 +24,12 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
-      <AppStack />
+    <ModalProvider>
+      <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
+        <AppStack />
 
-      <StatusBar style="dark-content" backgroundColor="transparent" />
-    </View>
+        <StatusBar style="dark-content" backgroundColor="transparent" />
+      </View>
+    </ModalProvider>
   )
 }
