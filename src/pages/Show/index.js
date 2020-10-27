@@ -4,6 +4,8 @@ import { useRoute, useNavigation } from '@react-navigation/native'
 import { heightInCm, weightInKg } from '../../utils/convertMeasures'
 import iconTypes from '../../utils/typeIcon'
 
+import { ProgressBar } from '../../components'
+
 import BackIcon from '../../assets/images/icons/arrow.png'
 import MarkIcon from '../../assets/images/icons/check.png'
 
@@ -26,12 +28,18 @@ import {
   TypeText,
   MeasuresContainer,
   MeasuresText,
+  StatsContainer,
+  TitleSession,
+  AbilitiesContainer,
+  AbilitiesItemText,
 } from './styles'
 
 export default () => {
   const { params } = useRoute()
   const { goBack } = useNavigation()
-  const [pokemon, setPokemon] = useState({})
+  const [pokemon, setPokemon] = useState({
+    abilities: [],
+  })
 
   useEffect(() => {
     setPokemon(params)
@@ -76,6 +84,31 @@ export default () => {
           </MeasuresContainer>
         </BackgroundContainer>
       </ImageContainer>
+
+      <StatsContainer>
+        <TitleSession>Stats</TitleSession>
+        <ProgressBar title="Hp" value={pokemon?.stats?.hp} />
+        <ProgressBar title="Attack" value={pokemon?.stats?.attack} />
+        <ProgressBar title="Defense" value={pokemon?.stats?.defense} />
+        <ProgressBar
+          title="Special Attack"
+          value={pokemon?.stats?.specialAttack}
+        />
+        <ProgressBar
+          title="Special defense"
+          value={pokemon?.stats?.specialDefense}
+        />
+        <ProgressBar title="Speed" value={pokemon?.stats?.speed} />
+      </StatsContainer>
+
+      <AbilitiesContainer>
+        <TitleSession>Abilities</TitleSession>
+        {pokemon?.abilities.map(({ ability }, index) => (
+          <AbilitiesItemText key={ability.name}>
+            {index + 1} - {ability.name}
+          </AbilitiesItemText>
+        ))}
+      </AbilitiesContainer>
     </ShowContainer>
   )
 }

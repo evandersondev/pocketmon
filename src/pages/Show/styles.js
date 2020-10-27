@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 
-export const ShowContainer = styled.View`
+export const ShowContainer = styled.ScrollView`
   flex: 1;
-  padding: 0 30px;
+  padding: 0 30px 30px 30px;
   background: ${({ typeColor }) =>
     typeColor ? colors.type.colors[typeColor] : colors.ligth};
 `
@@ -124,4 +124,25 @@ export const MeasuresContainer = styled.View`
 export const MeasuresText = styled.Text`
   font-size: 18px;
   font-family: 'Nunito_400Regular';
+`
+
+export const StatsContainer = styled.View`
+  padding: 30px 0;
+`
+
+export const TitleSession = styled.Text`
+  font-size: 26px;
+  font-family: 'Nunito_800ExtraBold';
+  margin-bottom: 15px;
+`
+
+export const AbilitiesContainer = styled.View`
+  padding-bottom: 60px;
+`
+
+export const AbilitiesItemText = styled.Text`
+  font-size: 18px;
+  font-family: 'Nunito_700Bold';
+  margin-bottom: 5px;
+  text-transform: capitalize;
 `

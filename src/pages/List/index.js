@@ -12,7 +12,7 @@ export default () => {
   const { navigate } = useNavigation()
 
   async function fetchPokemons() {
-    setPokemons(await api.getAllPokemons(offset))
+    setPokemons(await api.getAllPokemons(toString(offset)))
   }
 
   async function fetchPokemon(id) {
@@ -31,11 +31,10 @@ export default () => {
       <ListView
         data={pokemons}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => fetchPokemon(item.id)}>
+          <TouchableOpacity key={item.id} onPress={() => fetchPokemon(item.id)}>
             <Card item={item} />
           </TouchableOpacity>
         )}
-        // renderItem={Card}
         keyExtractor={({ id }) => id}
       />
     </ListContainer>
