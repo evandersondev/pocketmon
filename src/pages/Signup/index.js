@@ -1,5 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import UserIcon from '../../assets/images/icons/user.png'
+import EmailIcon from '../../assets/images/icons/email.png'
+import PasswordIcon from '../../assets/images/icons/password.png'
 
 import {
   Container,
@@ -11,12 +16,34 @@ import {
 } from './styles'
 
 import { Input, Button } from '../../components'
+import { Alert } from 'react-native'
 
 export default () => {
   const { navigate } = useNavigation()
+  const [form, setForm] = useState({
+    username: '',
+    email: '',
+    password: '',
+  })
 
   function haveAccount() {
     navigate('Signin')
+  }
+
+  async function handleFormSubmit() {
+    const arrayForm = Object.values(form)
+    arrayForm.map(value => {
+      if (value === '') {
+        return Alert.alert('Some is wwrong', 'vefiry the fildes and try agin!')
+      }
+    })
+
+    try {
+      await AsyncStorage.setItem('user', JSON.stringify(form))
+      navigate('Signin')
+    } catch (error) {
+      Alert.alert('User not created', 'Maybe some information it wrongs!')
+    }
   }
 
   return (
@@ -26,11 +53,31 @@ export default () => {
         exmaple: Photo, Bio, Email...
       </TextMessage>
       <Form>
-        <Input placeholder="Github username" />
-        <Input placeholder="E-mail" />
-        <Input placeholder="Password" />
+        <Input
+          icon={UserIcon}
+          name="username"
+          placeholder="Github username"
+          value={form.username}
+          onChangeText={value => setForm({ ...form, username: value })}
+        />
+        <Input
+          icon={EmailIcon}
+          name="email"
+          type="email"
+          placeholder="E-mail"
+          value={form.email}
+          onChangeText={value => setForm({ ...form, email: value })}
+        />
+        <Input
+          icon={PasswordIcon}
+          name="password"
+          secureTextEntry={true}
+          placeholder="Password"
+          value={form.password}
+          onChangeText={value => setForm({ ...form, password: value })}
+        />
 
-        <Button title="Create account" />
+        <Button onPress={handleFormSubmit} title="Create account" />
       </Form>
 
       <CreateAccountContainer>

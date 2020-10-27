@@ -8,6 +8,7 @@ import {
 } from '@expo-google-fonts/nunito'
 import { AppLoading } from 'expo'
 import AppStack from './src/routes/AppStack'
+import { View } from 'react-native'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,10 +22,10 @@ export default function App() {
   }
 
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
       <AppStack />
 
       <StatusBar style="dark-content" backgroundColor="transparent" />
-    </>
+    </View>
   )
 }

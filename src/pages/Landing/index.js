@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useNavigation } from '@react-navigation/native'
+// import { useNavigation } from '@react-navigation/native'
 
 import LandingImage from '../../assets/images/landing.png'
 import CheckIcon from '../../assets/images/icons/check.png'

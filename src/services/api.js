@@ -5,8 +5,8 @@ const api = axios.create({
 })
 
 export default {
-  async getAllPokemos() {
-    const { data: results } = await api.get('?limit=150')
+  async getAllPokemons(limit) {
+    const { data: results } = await api.get(`?limit=${limit}`)
 
     const data = results.results.map((pokemon, index) => {
       const id = index + 1
@@ -19,6 +19,19 @@ export default {
       }
     })
 
-    return data
+    return [...data]
+  },
+
+  async getPokemonById(id) {
+    const { data } = await api.get(`/${id}`)
+    const image = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
+
+    return {
+      ...data,
+      image,
+      type: data.types[0].type.name,
+      height: data.height,
+      weight: data.weight,
+    }
   },
 }

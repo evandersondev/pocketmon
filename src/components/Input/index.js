@@ -1,7 +1,22 @@
 import React from 'react'
 
-import { InputContainer } from './styles'
+import {
+  InputContainer,
+  Input,
+  ImageContainer,
+  InputIcon,
+  TextPassword,
+} from './styles'
 
-export default ({ ...rest }) => {
-  return <InputContainer {...rest} />
+export default ({ icon, type = 'text', ...rest }) => {
+  return (
+    <>
+      <InputContainer>
+        <ImageContainer>
+          <InputIcon resizeMode="cover" source={icon} />
+        </ImageContainer>
+        <Input {...rest} type={type} autoCompleteType="off" />
+      </InputContainer>
+    </>
+  )
 }

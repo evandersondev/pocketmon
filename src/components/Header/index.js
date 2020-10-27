@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-
+import { Platform, StatusBar } from 'react-native'
 import LogoImage from '../../assets//images/logo.png'
 import LogoutIcon from '../../assets/images/icons/logout.png'
 
@@ -14,7 +14,11 @@ export default () => {
   }
 
   return (
-    <HeaderContainer>
+    <HeaderContainer
+      style={{
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+      }}
+    >
       <Logo resizeMode="contain" source={LogoImage} />
 
       <Logout onPress={handleLogout}>
