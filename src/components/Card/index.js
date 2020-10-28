@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {
-  Container,
   CardContainer,
   PokemonId,
   Info,
@@ -10,18 +9,20 @@ import {
   PokemonIdContainer,
 } from './styles'
 
-export default ({ item }) => {
+export default ({ item, type }) => {
   return (
-    <Container>
-      <CardContainer style={{ elevation: 2 }}>
-        <Info>
-          <PokemonIdContainer>
-            <PokemonId>#{item.id}</PokemonId>
-          </PokemonIdContainer>
-          <PokemonName>{item.name}</PokemonName>
-        </Info>
-        <ImagePokemon resizeMode="contain" source={{ uri: item.image }} />
-      </CardContainer>
-    </Container>
+    <CardContainer type={type} style={{ elevation: 2 }}>
+      <Info type={type}>
+        <PokemonIdContainer type={type}>
+          <PokemonId type={type}>#{item.id}</PokemonId>
+        </PokemonIdContainer>
+        <PokemonName type={type}>{item.name}</PokemonName>
+      </Info>
+      <ImagePokemon
+        type={type}
+        resizeMode="contain"
+        source={{ uri: item.image }}
+      />
+    </CardContainer>
   )
 }

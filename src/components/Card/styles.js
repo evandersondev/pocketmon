@@ -1,26 +1,31 @@
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
-
-export const Container = styled.TouchableOpacity``
+import { Dimensions } from 'react-native'
 
 export const CardContainer = styled.TouchableOpacity`
-  width: 100%;
-  height: 150px;
+  width: ${({ type }) =>
+    type === 'squad' ? Dimensions.get('screen').width / 2 - 38 : '100%'};
+  height: ${({ type }) =>
+    type === 'squad' ? Dimensions.get('screen').width / 2 - 38 : '150px'};
   background: ${colors.card};
+  margin-left: ${({ type }) => (type === 'squad' ? '10px' : 'auto')};
+  margin-right: ${({ type }) => (type === 'squad' ? '10px' : 'auto')};
   border-radius: 8px;
   margin-bottom: 10px;
-  padding: 8px 30px;
+  padding: ${({ type }) => (type === 'squad' ? '15px' : '8px 30px')};
   flex-direction: row;
   justify-content: space-between;
 `
 export const Info = styled.View`
   justify-content: space-between;
+  width: ${({ type }) => (type === 'squad' ? '100%' : 'auto')};
 `
 
 export const PokemonIdContainer = styled.View`
-  width: 70px;
-  height: 70px;
-  background: ${colors.primary}2f;
+  width: ${({ type }) => (type === 'squad' ? '30px' : '70px')};
+  height: ${({ type }) => (type === 'squad' ? '30px' : '70px')};
+  background: ${({ type }) =>
+    type === 'squad' ? 'transparent' : `${colors.primary}12`};
   border-radius: 35px;
   align-items: center;
   justify-content: center;
@@ -28,22 +33,24 @@ export const PokemonIdContainer = styled.View`
 
 export const PokemonId = styled.Text`
   color: ${colors.dark};
-  font-size: 22px;
+  font-size: ${({ type }) => (type === 'squad' ? '14px' : '18px')};
   border-radius: 8px;
   font-family: 'Nunito_700Bold';
 `
 
 export const PokemonName = styled.Text`
-  font-size: 26px;
+  font-size: ${({ type }) => (type === 'squad' ? '16px' : '26px')};
   font-family: 'Nunito_800ExtraBold';
   color: ${colors.dark};
   letter-spacing: 1px;
   text-transform: capitalize;
-  margin-bottom: 10px;
+  margin-bottom: ${({ type }) => (type === 'squad' ? '0px' : '10px')};
+  text-align: ${({ type }) => (type === 'squad' ? 'center' : 'left')};
 `
 
 export const ImagePokemon = styled.Image`
-  height: 120px;
-  width: 120px;
-  margin: auto 0;
+  height: ${({ type }) => (type === 'squad' ? '90px' : '120px')};
+  width: ${({ type }) => (type === 'squad' ? '90px' : '120px')};
+  margin: ${({ type }) =>
+    type === 'squad' ? '20px 25px auto -130px' : 'auto 0'};
 `

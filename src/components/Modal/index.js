@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Modal } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+import { saveDataPokedex } from '../../utils'
 
 import { useModal } from '../../context/Modal'
 
@@ -21,33 +21,13 @@ import unvisitedIcon from '../../assets/images/icons/unvisited.png'
 import visitedIcon from '../../assets/images/icons/visited.png'
 import captureIcon from '../../assets/images/icons/captured.png'
 
-export default ({ id }) => {
+export default ({ id, name, image }) => {
   const { closeModal, modal } = useModal()
 
-  async function markPokemonAs(value) {
-    const pokemonStorage = await AsyncStorage.getItem('mark_pokemon')
-
-    if (!pokemonStorage) {
-      await AsyncStorage.setItem('mark_pokemon', JSON.stringify([]))
-    }
-    const pokemonStorageInObject = JSON.parse(pokemonStorage)
-
-    await AsyncStorage.setItem(
-      'mark_pokemon',
-      JSON.stringify({
-        ...pokemonStorageInObject,
-        [id]: {
-          markAs: value,
-        },
-      }),
-    )
-
-    console.log('done')
+  function markPokemonAs(markAs) {
+    saveDataPokedex({ id, name, image, markAs })
+    console.log('salvo')
   }
-
-  // useEffect(() => {
-  // markPokemonAs()
-  // }, [modal])
 
   return (
     <Modal transparent={true} visible={modal.enable}>

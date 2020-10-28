@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Platform, StatusBar } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-community/async-storage'
+import { chekMarkedAs } from '../../utils'
 
 import { heightInCm, weightInKg } from '../../utils/convertMeasures'
 import { useModal } from '../../context/Modal'
@@ -44,31 +44,22 @@ export default () => {
 
   const [pokemon, setPokemon] = useState({
     abilities: [],
+    markAs: 'none',
   })
 
   async function loadPokemon() {
-    const pokemonMarkedAs = await AsyncStorage.getItem('mark_pokemon')
-    const marked = JSON.parse(pokemonMarkedAs)
+    const { markAs } = await chekMarkedAs(params.id)
 
-    console.log(marked[params.id])
-
-    if (marked[params.id] !== undefined) {
-      setPokemon({
-        ...params,
-        markAs: marked[params.id].markAs,
-      })
-    } else {
-      setPokemon({ ...params, markAs: 'none' })
-    }
+    setPokemon({ ...params, markAs: markAs ?? 'none' })
   }
 
   useEffect(() => {
     loadPokemon()
-  }, [pokemon.id])
+  }, [])
 
   return (
     <>
-      <Modal id={pokemon.id} />
+      <Modal id={pokemon.id} name={pokemon.name} image={pokemon.image} />
 
       {pokemon && (
         <ShowContainer

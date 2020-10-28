@@ -1,6 +1,6 @@
-import axios from 'axios'
+import { create } from 'axios'
 
-const api = axios.create({
+const api = create({
   baseURL: 'https://pokeapi.co/api/v2/pokemon',
 })
 
