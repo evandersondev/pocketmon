@@ -11,7 +11,11 @@ const HeaderContainer = styled.View`
 const Logo = styled.Image``
 
 const Logout = styled.TouchableOpacity`
-  padding: 15px 0px 15px 30px;
+  width: 50px;
+  height: 40px;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
 `
 
 const LogoutImage = styled.Image``

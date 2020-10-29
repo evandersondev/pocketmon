@@ -1,12 +1,17 @@
 import { create } from 'axios'
 
 const api = create({
-  baseURL: `http://api.github.com/users/`,
+  baseURL: `https://api.github.com/users/`,
 })
 
 export default {
   async getInfoUser(name) {
-    const response = api.get(name)
-    console.log(response)
+    const { data } = await api.get(name)
+
+    if (!data) {
+      return {}
+    }
+
+    return data
   },
 }

@@ -1,10 +1,68 @@
-import React from 'react'
-import { View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Header } from '../../components'
+import github from '../../services/github'
 
-// import { Container } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const Profile = () => {
-  return <View />
+import CheckIcon from '../../assets/images/icons/check.png'
+import CheckedIcon from '../../assets/images/icons/checked.png'
+
+import styles from './styles'
+
+export default () => {
+  const [profile, setProfile] = useState({})
+
+  useEffect(() => {
+    ;(async () => {
+      const response = await github.getInfoUser('evandersondev')
+
+      setProfile({ ...response })
+    })()
+  }, [])
+
+  const [checked, setChecked] = useState(true)
+
+  async function toggleCheck() {
+    setChecked(!checked)
+    await AsyncStorage.setItem('show_landing', checked ? 'check' : 'checked')
+  }
+  return (
+    <styles.ProfileContainer>
+      <Header />
+      <styles.TitleSession>Profile</styles.TitleSession>
+      <styles.ImageProfile
+        resizeMode="contain"
+        source={{ uri: profile.avatar_url }}
+      />
+
+      <styles.BodyContainer>
+        <styles.InfoContainer>
+          <styles.LabelInfoText>Username</styles.LabelInfoText>
+          <styles.ValueInfoText>{profile.login}</styles.ValueInfoText>
+        </styles.InfoContainer>
+
+        <styles.InfoContainer>
+          <styles.LabelInfoText>Name</styles.LabelInfoText>
+          <styles.ValueInfoText>{profile.name}</styles.ValueInfoText>
+        </styles.InfoContainer>
+
+        <styles.InfoContainer>
+          <styles.LabelInfoText>E-mail</styles.LabelInfoText>
+          <styles.ValueInfoText>evandersondev@gmail.com</styles.ValueInfoText>
+        </styles.InfoContainer>
+
+        <styles.InfoContainer>
+          <styles.LabelInfoText>Github page</styles.LabelInfoText>
+          <styles.ValueInfoText>{profile.html_url}</styles.ValueInfoText>
+        </styles.InfoContainer>
+      </styles.BodyContainer>
+
+      <styles.ShowLandingContainer>
+        <styles.TextLanding>Show me lading page</styles.TextLanding>
+        <styles.CheckButton onPress={toggleCheck}>
+          <styles.Check source={checked ? CheckedIcon : CheckIcon} />
+        </styles.CheckButton>
+      </styles.ShowLandingContainer>
+    </styles.ProfileContainer>
+  )
 }
-
-export default Profile

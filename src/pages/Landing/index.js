@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import LandingImage from '../../assets/images/landing.png'
@@ -9,6 +10,7 @@ import { Button } from '../../components'
 import styles from './styles'
 
 export default () => {
+  const { navigate } = useNavigation()
   const [checked, setChecked] = useState(true)
 
   async function toggleCheck() {
@@ -28,7 +30,11 @@ export default () => {
         For we get some informations addtionals.
       </styles.Info>
 
-      <Button style={{ marginBottom: 15 }} title="Continue" />
+      <Button
+        style={{ marginBottom: 15 }}
+        onPress={() => navigate('Signin')}
+        title="Continue"
+      />
 
       <styles.ShowLanding>
         <styles.TextLanding>Always show me this page</styles.TextLanding>
