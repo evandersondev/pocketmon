@@ -1,10 +1,8 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-
-import styles from './styles'
-
+import { images } from '../../assets'
 import { Input, Button } from '../../components'
-import logotipo from '../../assets/images/logotipo.png'
+import styles from './styles'
 
 export default () => {
   const { navigate } = useNavigation()
@@ -19,10 +17,10 @@ export default () => {
 
   return (
     <styles.Container>
-      <styles.LogoImage source={logotipo} />
+      <styles.LogoImage source={images.logotipo} />
       <styles.Form>
-        <Input placeholder="E-mail" />
-        <Input placeholder="Password" />
+        <Input icon="email" placeholder="E-mail" />
+        <Input icon="password" placeholder="Password" />
 
         <Button title="Login" onPress={handleFormSubmit} />
       </styles.Form>

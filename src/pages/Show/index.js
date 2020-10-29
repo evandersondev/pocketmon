@@ -2,16 +2,10 @@ import React from 'react'
 import { Platform, StatusBar } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { usePokemon } from '../../context/Pokemon'
-
 import { heightInCm, weightInKg } from '../../utils/convertMeasures'
-
 import { useModal } from '../../context/Modal'
 import { ProgressBar, Modal } from '../../components'
-
-import iconTypes from '../../utils/typeIcon'
-import iconMark from '../../utils/iconMark'
-import BackIcon from '../../assets/images/icons/arrow.png'
-
+import { images } from '../../assets'
 import styles from './styles'
 
 export default () => {
@@ -32,7 +26,7 @@ export default () => {
         >
           <styles.HeaderShow>
             <styles.BackContainer onPress={goBack}>
-              <styles.BackImage resizeMode="contain" source={BackIcon} />
+              <styles.BackImage resizeMode="contain" source={images.arrow} />
             </styles.BackContainer>
 
             <styles.MarkContainer onPress={showModal}>
@@ -40,7 +34,7 @@ export default () => {
               <styles.MarkImageContainer>
                 <styles.MarkImage
                   resizeMode="contain"
-                  source={iconMark[markedAs]}
+                  source={images[markedAs]}
                 />
               </styles.MarkImageContainer>
             </styles.MarkContainer>
@@ -59,7 +53,7 @@ export default () => {
               <styles.TypeContainer>
                 <styles.TypeImage
                   resizeMode="contain"
-                  source={iconTypes[pokemon.type]}
+                  source={images[pokemon.type]}
                 />
                 <styles.TypeText>{pokemon.type}</styles.TypeText>
               </styles.TypeContainer>

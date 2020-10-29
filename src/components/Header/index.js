@@ -1,8 +1,7 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import LogoImage from '../../assets//images/logo.png'
-import LogoutIcon from '../../assets/images/icons/logout.png'
 
+import { images } from '../../assets'
 import styles from './styles'
 
 export default () => {
@@ -14,10 +13,10 @@ export default () => {
 
   return (
     <styles.HeaderContainer>
-      <styles.Logo resizeMode="contain" source={LogoImage} />
+      <styles.Logo resizeMode="contain" source={images.logo} />
 
       <styles.Logout onPress={handleLogout}>
-        <styles.LogoutImage source={LogoutIcon} />
+        <styles.LogoutImage source={images.logout} />
       </styles.Logout>
     </styles.HeaderContainer>
   )

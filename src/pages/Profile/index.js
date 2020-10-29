@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Header } from '../../components'
 import github from '../../services/github'
-
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
-import CheckIcon from '../../assets/images/icons/check.png'
-import CheckedIcon from '../../assets/images/icons/checked.png'
-
+import { images } from '../../assets'
 import styles from './styles'
 
 export default () => {
@@ -24,7 +20,10 @@ export default () => {
 
   async function toggleCheck() {
     setChecked(!checked)
-    await AsyncStorage.setItem('show_landing', checked ? 'check' : 'checked')
+    await AsyncStorage.setItem(
+      'show_landing',
+      checked ? images.check : images.checked,
+    )
   }
   return (
     <styles.ProfileContainer>

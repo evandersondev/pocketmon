@@ -10,7 +10,7 @@ export default ({ title, value = 0 }) => (
       progress={value / 100 ?? 0}
       borderRadius={0}
       width={null}
-      color="#ff6348"
+      color="rgba(235,77,75,1)"
       height={8}
       borderWidth={0}
       unfilledColor="#dfe4ea"

@@ -2,10 +2,6 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import UserIcon from '../../assets/images/icons/user.png'
-import EmailIcon from '../../assets/images/icons/email.png'
-import PasswordIcon from '../../assets/images/icons/password.png'
-
 import styles from './styles'
 
 import { Input, Button } from '../../components'
@@ -47,14 +43,14 @@ export default () => {
       </styles.TextMessage>
       <styles.Form>
         <Input
-          icon={UserIcon}
+          icon="user"
           name="username"
           placeholder="Github username"
           value={form.username}
           onChangeText={value => setForm({ ...form, username: value })}
         />
         <Input
-          icon={EmailIcon}
+          icon="email"
           name="email"
           type="email"
           placeholder="E-mail"
@@ -62,7 +58,7 @@ export default () => {
           onChangeText={value => setForm({ ...form, email: value })}
         />
         <Input
-          icon={PasswordIcon}
+          icon="password"
           name="password"
           secureTextEntry={true}
           placeholder="Password"

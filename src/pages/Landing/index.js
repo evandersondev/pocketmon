@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
-import { useNavigation, useIsFocused, View } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import LandingImage from '../../assets/images/landing.png'
-import CheckIcon from '../../assets/images/icons/check.png'
-import CheckedIcon from '../../assets/images/icons/checked.png'
+import { images } from '../../assets'
 import { Button } from '../../components'
 
 import styles from './styles'
 
 export default () => {
-  const isFocused = useIsFocused()
   const { navigate } = useNavigation()
   const [checked, setChecked] = useState(true)
 
@@ -22,7 +19,7 @@ export default () => {
   return (
     <styles.LandingContainer>
       <styles.Title>Welcome{'\n'}future trainer</styles.Title>
-      <styles.Image resizeMode="contain" source={LandingImage} />
+      <styles.Image resizeMode="contain" source={images.landing} />
       <styles.SubTitle>
         Before to begin capturing your pokemons you need to create a account.
       </styles.SubTitle>
@@ -40,7 +37,7 @@ export default () => {
       <styles.ShowLanding>
         <styles.TextLanding>Always show me this page</styles.TextLanding>
         <styles.CheckButton onPress={toggleCheck}>
-          <styles.Check source={checked ? CheckedIcon : CheckIcon} />
+          <styles.Check source={checked ? images.checked : images.check} />
         </styles.CheckButton>
       </styles.ShowLanding>
     </styles.LandingContainer>

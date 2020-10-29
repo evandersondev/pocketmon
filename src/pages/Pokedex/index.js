@@ -3,10 +3,8 @@ import { TouchableOpacity } from 'react-native'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { loadPokemonsCaptured } from '../../utils'
 import { usePokemon } from '../../context/Pokemon'
-
+import { images } from '../../assets'
 import { Header, Card } from '../../components'
-import searchIcon from '../../assets/images/icons/search.png'
-
 import styles from './styles'
 
 const Pokedex = () => {
@@ -36,7 +34,10 @@ const Pokedex = () => {
         <styles.InputSearch placeholder="Filter pokemon" />
 
         <styles.ButtonSearchContainer>
-          <styles.ButtonSearchImage resizeMode="contain" source={searchIcon} />
+          <styles.ButtonSearchImage
+            resizeMode="contain"
+            source={images.search}
+          />
         </styles.ButtonSearchContainer>
       </styles.InputSearchContainer>
 
