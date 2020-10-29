@@ -1,28 +1,19 @@
 import React from 'react'
 
-import {
-  CardContainer,
-  PokemonId,
-  Info,
-  ImagePokemon,
-  PokemonName,
-  PokemonIdContainer,
-} from './styles'
+import styles from './styles'
 
-export default ({ item, type }) => {
-  return (
-    <CardContainer type={type} style={{ elevation: 2 }}>
-      <Info type={type}>
-        <PokemonIdContainer type={type}>
-          <PokemonId type={type}>#{item.id}</PokemonId>
-        </PokemonIdContainer>
-        <PokemonName type={type}>{item.name}</PokemonName>
-      </Info>
-      <ImagePokemon
-        type={type}
-        resizeMode="contain"
-        source={{ uri: item.image }}
-      />
-    </CardContainer>
-  )
-}
+export default ({ pokemon, type }) => (
+  <styles.CardContainer type={type} style={{ elevation: 2 }}>
+    <styles.Info type={type}>
+      <styles.PokemonIdContainer type={type}>
+        <styles.PokemonId type={type}>#{pokemon.id}</styles.PokemonId>
+      </styles.PokemonIdContainer>
+      <styles.PokemonName type={type}>{pokemon.name}</styles.PokemonName>
+    </styles.Info>
+    <styles.ImagePokemon
+      type={type}
+      resizeMode="contain"
+      source={{ uri: pokemon.image }}
+    />
+  </styles.CardContainer>
+)

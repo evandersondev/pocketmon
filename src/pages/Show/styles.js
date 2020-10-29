@@ -1,55 +1,62 @@
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 
-export const ShowContainer = styled.ScrollView`
+const ShowContainer = styled.ScrollView`
   flex: 1;
   padding: 0 30px 30px 30px;
   background: ${({ typeColor }) =>
     typeColor ? colors.type.colors[typeColor] : colors.ligth};
 `
 
-export const HeaderShow = styled.View`
+const HeaderShow = styled.View`
   height: 86px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `
 
-export const BackContainer = styled.TouchableOpacity`
+const BackContainer = styled.TouchableOpacity`
   height: 100%;
 `
 
-export const BackImage = styled.Image`
+const BackImage = styled.Image`
   margin: auto 0;
   height: 18px;
 `
 
-export const MarkContainer = styled.TouchableOpacity`
+const MarkContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   height: 100%;
 `
 
-export const MarkText = styled.Text`
+const MarkText = styled.Text`
   font-size: 14px;
   font-family: 'Nunito_700Bold';
   color: ${colors.dark};
 `
 
-export const MarkImage = styled.Image`
+const MarkImageContainer = styled.View`
+  height: 25px;
+  width: 25px;
+  align-items: center;
+  justify-content: flex-end;
   margin-left: 8px;
-  height: 22px;
-  margin-top: 3px;
 `
 
-export const ImageContainer = styled.View`
+const MarkImage = styled.Image`
+  height: 22px;
+  width: 22px;
+`
+
+const ImageContainer = styled.View`
   height: 400px;
   margin-top: 130px;
   justify-content: flex-end;
   align-items: center;
 `
 
-export const BackgroundContainer = styled.View`
+const BackgroundContainer = styled.View`
   background: ${colors.card}88;
   margin-top: auto;
   position: relative;
@@ -58,16 +65,14 @@ export const BackgroundContainer = styled.View`
   border-radius: 8px;
 `
 
-export const PokemonImage = styled.Image`
+const PokemonImage = styled.Image`
   width: 200px;
   height: 200px;
-  /* position: absolute;
-  top: -120px; */
   margin: -230px auto 30px;
   z-index: 99;
 `
 
-export const IdContainer = styled.View`
+const IdContainer = styled.View`
   width: 120px;
   height: 36px;
   align-items: center;
@@ -77,13 +82,13 @@ export const IdContainer = styled.View`
   border-radius: 18px;
 `
 
-export const TextId = styled.Text`
+const TextId = styled.Text`
   font-family: 'Nunito_700Bold';
   font-size: 17px;
   color: ${colors.dark};
 `
 
-export const PokemonName = styled.Text`
+const PokemonName = styled.Text`
   text-align: center;
   font-family: 'Nunito_800ExtraBold';
   font-size: 38px;
@@ -92,7 +97,7 @@ export const PokemonName = styled.Text`
   text-transform: capitalize;
 `
 
-export const TypeContainer = styled.View`
+const TypeContainer = styled.View`
   width: 120px;
   height: 50px;
   flex-direction: row;
@@ -102,19 +107,19 @@ export const TypeContainer = styled.View`
   justify-content: space-around;
 `
 
-export const TypeImage = styled.Image`
+const TypeImage = styled.Image`
   width: 20px;
   height: 20px;
   margin-top: 5px;
 `
-export const TypeText = styled.Text`
+const TypeText = styled.Text`
   color: ${colors.dark};
   font-size: 20px;
   font-family: 'Nunito_400Regular';
   letter-spacing: 0.7px;
 `
 
-export const MeasuresContainer = styled.View`
+const MeasuresContainer = styled.View`
   width: 100%;
   height: 35px;
   flex-direction: row;
@@ -123,28 +128,54 @@ export const MeasuresContainer = styled.View`
   margin-top: 20px;
 `
 
-export const MeasuresText = styled.Text`
+const MeasuresText = styled.Text`
   font-size: 18px;
   font-family: 'Nunito_400Regular';
 `
 
-export const StatsContainer = styled.View`
+const StatsContainer = styled.View`
   padding: 30px 0;
 `
 
-export const TitleSession = styled.Text`
+const TitleSession = styled.Text`
   font-size: 26px;
   font-family: 'Nunito_800ExtraBold';
   margin-bottom: 15px;
 `
 
-export const AbilitiesContainer = styled.View`
+const AbilitiesContainer = styled.View`
   padding-bottom: 60px;
 `
 
-export const AbilitiesItemText = styled.Text`
+const AbilitiesItemText = styled.Text`
   font-size: 18px;
   font-family: 'Nunito_700Bold';
   margin-bottom: 5px;
   text-transform: capitalize;
 `
+
+export default {
+  ShowContainer,
+  HeaderShow,
+  BackContainer,
+  BackImage,
+  MarkContainer,
+  MarkText,
+  MarkImageContainer,
+  MarkImage,
+  ImageContainer,
+  BackgroundContainer,
+  PokemonImage,
+  IdContainer,
+  TextId,
+  PokemonName,
+  TypeContainer,
+  TypeImage,
+  TypeText,
+  MeasuresContainer,
+  MeasuresText,
+  StatsContainer,
+  TitleSession,
+  AbilitiesContainer,
+  AbilitiesItemText,
+}

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 
-export const LandingContainer = styled.View`
+const LandingContainer = styled.View`
   flex: 1;
   background: ${colors.ligth};
   align-items: center;
@@ -9,7 +9,7 @@ export const LandingContainer = styled.View`
   padding: 0 30px;
 `
 
-export const Title = styled.Text`
+const Title = styled.Text`
   font-size: 36px;
   text-align: center;
   font-family: 'Nunito_800ExtraBold';
@@ -18,11 +18,11 @@ export const Title = styled.Text`
   color: ${colors.dark};
 `
 
-export const Image = styled.Image`
+const Image = styled.Image`
   margin-bottom: 15px;
 `
 
-export const SubTitle = styled.Text`
+const SubTitle = styled.Text`
   font-size: 24px;
   text-align: center;
   font-family: 'Nunito_700Bold';
@@ -30,7 +30,7 @@ export const SubTitle = styled.Text`
   color: ${colors.dark};
 `
 
-export const Info = styled.Text`
+const Info = styled.Text`
   font-size: 18px;
   text-align: center;
   font-family: 'Nunito_400Regular';
@@ -38,7 +38,7 @@ export const Info = styled.Text`
   color: ${colors.dark};
 `
 
-export const ShowLanding = styled.View`
+const ShowLanding = styled.View`
   width: 100%;
   flex-direction: row;
   margin-top: 30px;
@@ -46,13 +46,25 @@ export const ShowLanding = styled.View`
   align-items: center;
 `
 
-export const TextLanding = styled.Text`
+const TextLanding = styled.Text`
   font-size: 14px;
   color: ${colors.dark};
 `
 
-export const CheckButton = styled.TouchableOpacity`
+const CheckButton = styled.TouchableOpacity`
   padding: 10px;
 `
 
-export const Check = styled.Image``
+const Check = styled.Image``
+
+export default {
+  LandingContainer,
+  Title,
+  Image,
+  SubTitle,
+  Info,
+  ShowLanding,
+  TextLanding,
+  CheckButton,
+  Check,
+}

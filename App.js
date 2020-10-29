@@ -10,6 +10,7 @@ import {
 } from '@expo-google-fonts/nunito'
 
 import AppStack from './src/routes/AppStack'
+import PokemonProvider from './src/context/Pokemon'
 import ModalProvider from './src/context/Modal'
 
 export default function App() {
@@ -24,12 +25,14 @@ export default function App() {
   }
 
   return (
-    <ModalProvider>
-      <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
-        <AppStack />
+    <PokemonProvider>
+      <ModalProvider>
+        <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
+          <AppStack />
 
-        <StatusBar style="dark-content" backgroundColor="transparent" />
-      </View>
-    </ModalProvider>
+          <StatusBar style="dark-content" backgroundColor="transparent" />
+        </View>
+      </ModalProvider>
+    </PokemonProvider>
   )
 }

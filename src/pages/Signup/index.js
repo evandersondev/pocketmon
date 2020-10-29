@@ -6,14 +6,7 @@ import UserIcon from '../../assets/images/icons/user.png'
 import EmailIcon from '../../assets/images/icons/email.png'
 import PasswordIcon from '../../assets/images/icons/password.png'
 
-import {
-  Container,
-  TextMessage,
-  Form,
-  TextCreateAccount,
-  ButtonCreateAccount,
-  CreateAccountContainer,
-} from './styles'
+import styles from './styles'
 
 import { Input, Button } from '../../components'
 import { Alert } from 'react-native'
@@ -47,12 +40,12 @@ export default () => {
   }
 
   return (
-    <Container>
-      <TextMessage>
+    <styles.Container>
+      <styles.TextMessage>
         Please, you need to use your github username to get some information for
         exmaple: Photo, Bio, Email...
-      </TextMessage>
-      <Form>
+      </styles.TextMessage>
+      <styles.Form>
         <Input
           icon={UserIcon}
           name="username"
@@ -78,16 +71,20 @@ export default () => {
         />
 
         <Button onPress={handleFormSubmit} title="Create account" />
-      </Form>
+      </styles.Form>
 
-      <CreateAccountContainer>
-        <TextCreateAccount>You already have account?</TextCreateAccount>
-        <ButtonCreateAccount onPress={haveAccount}>
-          <TextCreateAccount style={{ fontWeight: 'bold', color: '#eb4d4b' }}>
+      <styles.CreateAccountContainer>
+        <styles.TextCreateAccount>
+          You already have account?
+        </styles.TextCreateAccount>
+        <styles.ButtonCreateAccount onPress={haveAccount}>
+          <styles.TextCreateAccount
+            style={{ fontWeight: 'bold', color: '#eb4d4b' }}
+          >
             back to login.
-          </TextCreateAccount>
-        </ButtonCreateAccount>
-      </CreateAccountContainer>
-    </Container>
+          </styles.TextCreateAccount>
+        </styles.ButtonCreateAccount>
+      </styles.CreateAccountContainer>
+    </styles.Container>
   )
 }

@@ -1,29 +1,33 @@
 import { create } from 'axios'
 
 const api = create({
-  baseURL: 'https://pokeapi.co/api/v2/pokemon',
+  baseURL: 'https://pokeapi.co/api/v2',
 })
 
 export default {
-  async getAllPokemons(limit) {
-    const { data: results } = await api.get(`?limit=${limit}`)
+  async getAllPokemons({ offset, amount = 10 }) {
+    const {
+      data: { pokemon_entries },
+    } = await api.get('pokedex/1/')
 
-    const data = results.results.map((pokemon, index) => {
-      const id = index + 1
+    const limit = offset + amount
+    const pokemonWithLimit = pokemon_entries.slice(offset, limit)
+
+    const data = pokemonWithLimit.map(pokemon => {
+      const id = pokemon.entry_number
       const image = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
-
       return {
         id,
-        name: pokemon.name,
+        name: pokemon.pokemon_species.name,
         image,
       }
     })
 
-    return [...data]
+    return { data }
   },
 
   async getPokemonById(id) {
-    const { data } = await api.get(`/${id}`)
+    const { data } = await api.get(`pokemon/${id}`)
     const image = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
 
     return {

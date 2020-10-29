@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { ButtonContainer, TextButton } from './styles'
+import styles from './styles'
 
-export default ({ title, ...rest }) => {
-  return (
-    <ButtonContainer {...rest}>
-      <TextButton>{title}</TextButton>
-    </ButtonContainer>
-  )
-}
+export default ({ title, ...rest }) => (
+  <styles.ButtonContainer {...rest}>
+    <styles.TextButton>{title}</styles.TextButton>
+  </styles.ButtonContainer>
+)

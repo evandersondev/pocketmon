@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { TouchableOpacity, Text } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { loadPokedexInStorage } from '../../utils'
+import React, { useState } from 'react'
+import { TouchableOpacity } from 'react-native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
+import { loadPokemonsCaptured } from '../../utils'
+import { usePokemon } from '../../context/Pokemon'
 
 import { Header, Card } from '../../components'
 import searchIcon from '../../assets/images/icons/search.png'
@@ -11,17 +12,18 @@ import styles from './styles'
 const Pokedex = () => {
   const { navigate } = useNavigation()
   const [pokemons, setPokemons] = useState([])
+  const { listPokemonById } = usePokemon()
 
   async function loadPokedex() {
-    setPokemons(await loadPokedexInStorage())
+    setPokemons(await loadPokemonsCaptured())
   }
 
   async function fetchPokemon(id) {
-    const data = await api.getPokemonById(id)
-    navigate('Show', { ...data })
+    await listPokemonById(id)
+    navigate('Show')
   }
 
-  useEffect(() => {
+  useFocusEffect(() => {
     loadPokedex()
   }, [])
 
@@ -41,15 +43,25 @@ const Pokedex = () => {
       <styles.ListView
         data={pokemons}
         renderItem={({ item }) => (
-          <TouchableOpacity key={item.id} onPress={() => fetchPokemon(item.id)}>
-            <Card item={item} type="squad" />
+          <TouchableOpacity onPress={() => fetchPokemon(item.id)}>
+            <Card pokemon={item} type="squad" />
           </TouchableOpacity>
         )}
-        keyExtractor={({ id }) => id}
+        keyExtractor={item => item.name}
         numColumns="2"
-        contentContainerStyle={{
+        columnWrapperStyle={{
           flexGrow: 1,
           alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          width: '100%',
+        }}
+        contentContainerStyle={{
+          // flex: 0.5,
+          width: '100%',
+
+          // height: '100%',
+          flexGrow: 1,
         }}
       />
     </styles.PokedexContainer>

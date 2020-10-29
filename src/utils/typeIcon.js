@@ -5,7 +5,7 @@ import water from '../assets/images/icons/water.png'
 import ground from '../assets/images/icons/ground.png'
 import rock from '../assets/images/icons/rock.png'
 import fairy from '../assets/images/icons/fairy.png'
-import posion from '../assets/images/icons/posion.png'
+import poison from '../assets/images/icons/poison.png'
 import bug from '../assets/images/icons/bug.png'
 import dragon from '../assets/images/icons/dragon.png'
 import psychic from '../assets/images/icons/psychic.png'
@@ -21,7 +21,7 @@ export default {
   ground,
   rock,
   fairy,
-  posion,
+  poison,
   bug,
   dragon,
   psychic,

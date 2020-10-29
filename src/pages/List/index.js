@@ -1,42 +1,57 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import api from '../../services/api'
+import { usePokemon } from '../../context/Pokemon'
+
 import { Header, Card } from '../../components'
 
-import { ListContainer, ListView, TitlePage } from './styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export default () => {
-  const [pokemons, setPokemons] = useState([])
-  const [offset, setOffeset] = useState(15)
-  const { navigate } = useNavigation()
+import styles from './styles'
 
-  async function fetchPokemons() {
-    setPokemons(await api.getAllPokemons(toString(offset)))
+export default () => {
+  const { pokemons, listPokemon, setPokemons, listPokemonById } = usePokemon()
+  const [refreshing, setRefreshing] = useState(false)
+  const { navigate } = useNavigation()
+  const [offset, setOffset] = useState(0)
+
+  async function goToPageShow(id) {
+    await listPokemonById(id)
+    navigate('Show')
   }
 
-  async function fetchPokemon(id) {
-    const data = await api.getPokemonById(id)
-    navigate('Show', { ...data })
+  function loadMore() {
+    setOffset(offset + 10)
+  }
+
+  function refreshPokemons() {
+    setOffset(0)
   }
 
   useEffect(() => {
-    fetchPokemons()
-  }, [])
+    listPokemon({ offset })
+  }, [offset])
 
   return (
-    <ListContainer>
+    <styles.ListContainer>
       <Header />
-      <TitlePage>Choose your pokemons</TitlePage>
-      <ListView
+
+      <styles.TitlePage>Choose your pokemons</styles.TitlePage>
+
+      <styles.ListView
         data={pokemons}
         renderItem={({ item }) => (
-          <TouchableOpacity key={item.id} onPress={() => fetchPokemon(item.id)}>
-            <Card item={item} />
+          <TouchableOpacity onPress={() => goToPageShow(item.id)}>
+            <Card pokemon={item} />
           </TouchableOpacity>
         )}
-        keyExtractor={({ id }) => id}
+        keyExtractor={item => item.name}
+        onEndReached={loadMore}
+        onEndReachedThreshold={0.1}
+        refreshing={refreshing}
+        onRefresh={refreshPokemons}
+        showsVerticalScrollIndicator={false}
+        scrollToIndex={params => console.log(params)}
       />
-    </ListContainer>
+    </styles.ListContainer>
   )
 }

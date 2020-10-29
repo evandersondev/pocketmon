@@ -7,21 +7,47 @@ export async function saveDataPokedex(data) {
     await AsyncStorage.setItem('pokedex', JSON.stringify([]))
   }
 
-  const pokedexStorageInObject = JSON.parse(pokedexStorage)
-  const savePokedex = [...pokedexStorageInObject, { ...data }]
+  const parsePokedex = JSON.parse(pokedexStorage)
 
-  const convertToJson = JSON.stringify(savePokedex)
+  const removePokemonById = parsePokedex?.filter(
+    pokemon => pokemon.id !== data.id,
+  )
 
-  await AsyncStorage.setItem('pokedex', convertToJson)
+  const filterPokemonById = parsePokedex?.filter(
+    pokemon => pokemon.id === data.id,
+  )
+
+  if (!filterPokemonById) {
+    const updatePokemon = {
+      ...filterPokemonById[0],
+      markAs: data.markAs,
+    }
+
+    await AsyncStorage.setItem(
+      'pokedex',
+      JSON.stringify([...removePokemonById, { ...updatePokemon }]),
+    )
+    console.log('aqui')
+  } else {
+    await AsyncStorage.setItem(
+      'pokedex',
+      JSON.stringify([...parsePokedex, { ...data }]),
+    )
+  }
 }
 
 export async function chekMarkedAs(id) {
   const pokedexStorage = await AsyncStorage.getItem('pokedex')
-  const pokedexStorageInObject = JSON.parse(pokedexStorage)
 
-  const pokemonFilter = pokedexStorageInObject.filter(
-    pokemon => pokemon.id === id,
-  )
+  if (!pokedexStorage) {
+    return {
+      markAs: 'none',
+    }
+  }
+
+  const parsePokedex = JSON.parse(pokedexStorage)
+
+  const pokemonFilter = parsePokedex.filter(pokemon => pokemon?.id === id)
 
   if (!pokemonFilter !== []) {
     return {
@@ -32,7 +58,22 @@ export async function chekMarkedAs(id) {
 
 export async function loadPokedexInStorage() {
   const pokedexStorage = await AsyncStorage.getItem('pokedex')
-  const pokedexStorageInObject = JSON.parse(pokedexStorage)
+  const parsePokedex = JSON.parse(pokedexStorage)
 
-  return pokedexStorageInObject || []
+  return parsePokedex || []
+}
+
+export async function loadPokemonsCaptured() {
+  const pokedexStorage = await AsyncStorage.getItem('pokedex')
+  const parsePokedex = JSON.parse(pokedexStorage)
+
+  const filterPokemonsCaptured = parsePokedex.filter(
+    pokemon => pokemon?.markAs === 'captured',
+  )
+
+  return filterPokemonsCaptured || []
+}
+
+export async function removePokedexInStorage() {
+  await AsyncStorage.removeItem('pokedex')
 }

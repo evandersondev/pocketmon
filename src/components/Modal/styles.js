@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 import { Dimensions } from 'react-native'
 import colors from '../../styles/colors'
 
-export const ModelScreen = styled.View`
+const ModelScreen = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -10,15 +10,15 @@ export const ModelScreen = styled.View`
   background: ${colors.dark}aa;
 `
 
-export const ModalContainer = styled.View`
-  width: ${Dimensions.get('screen').width - 60};
-  height: ${Dimensions.get('screen').width - 60};
+const ModalContainer = styled.View`
+  width: ${Dimensions.get('screen').width - 60}px;
+  height: ${Dimensions.get('screen').width - 60}px;
   background: ${colors.ligth};
   padding: 30px;
   border-radius: 8px;
 `
 
-export const HeaderModal = styled.View`
+const HeaderModal = styled.View`
   width: 105%;
   height: 15px;
   flex-direction: row;
@@ -26,23 +26,23 @@ export const HeaderModal = styled.View`
   align-items: center;
 `
 
-export const CloseButton = styled.TouchableOpacity`
+const CloseButton = styled.TouchableOpacity`
   padding: 8px;
 `
 
-export const CloseImage = styled.Image`
+const CloseImage = styled.Image`
   width: 32px;
   height: 32px;
 `
 
-export const BodyContainer = styled.View`
+const BodyContainer = styled.View`
   width: 100%;
   height: 100%;
   align-items: center;
   justify-content: center;
 `
 
-export const ItemBody = styled.TouchableOpacity`
+const ItemBody = styled.TouchableOpacity`
   width: 100%;
   height: 56px;
   flex-direction: row;
@@ -52,14 +52,26 @@ export const ItemBody = styled.TouchableOpacity`
   padding: 0 60px;
 `
 
-export const ItemImage = styled.Image`
+const ItemImage = styled.Image`
   margin-right: 30px;
   width: 32px;
   height: 32px;
 `
 
-export const ItemText = styled.Text`
+const ItemText = styled.Text`
   margin-right: auto;
   font-size: 18px;
   font-family: 'Nunito_400Regular';
 `
+
+export default {
+  ModelScreen,
+  ModalContainer,
+  HeaderModal,
+  CloseButton,
+  CloseImage,
+  BodyContainer,
+  ItemBody,
+  ItemImage,
+  ItemText,
+}
