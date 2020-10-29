@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useIsFocused, View } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import LandingImage from '../../assets/images/landing.png'
@@ -10,6 +10,7 @@ import { Button } from '../../components'
 import styles from './styles'
 
 export default () => {
+  const isFocused = useIsFocused()
   const { navigate } = useNavigation()
   const [checked, setChecked] = useState(true)
 

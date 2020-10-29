@@ -12,7 +12,7 @@ import PageTabs from './PageTabs'
 const { Navigator, Screen } = createStackNavigator()
 
 function AppStack() {
-  const [landgind, setLanding] = useState(false)
+  const [landing, setLanding] = useState(true)
 
   async function showLanding() {
     const value = await AsyncStorage.getItem('show_landing')
@@ -21,16 +21,13 @@ function AppStack() {
 
   useEffect(() => {
     showLanding()
-  }, [])
+  }, [landing])
 
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
-        {landgind ? (
-          <Screen name="Landing" component={Landing} />
-        ) : (
-          <Screen name="Signin" component={Signin} />
-        )}
+        {landing && <Screen name="Landing" component={Landing} />}
+        <Screen name="Signin" component={Signin} />
         <Screen name="Signup" component={Signup} />
         <Screen name="Show" component={Show} />
         <Screen name="PageTabs" component={PageTabs} />

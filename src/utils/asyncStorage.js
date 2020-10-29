@@ -1,43 +1,61 @@
 import AsyncStorage from '@react-native-community/async-storage'
 
-export async function saveDataPokedex(data) {
-  const pokedexStorage = await AsyncStorage.getItem('pokedex')
+async function getPokedexInStorage(key) {
+  const checkStorage = await AsyncStorage.getItem(key)
 
-  if (!pokedexStorage) {
-    await AsyncStorage.setItem('pokedex', JSON.stringify([]))
+  if (!checkStorage) {
+    await createStorage(key)
   }
 
-  const parsePokedex = JSON.parse(pokedexStorage)
+  return await AsyncStorage.getItem(key)
+}
 
-  const removePokemonById = parsePokedex?.filter(
-    pokemon => pokemon.id !== data.id,
-  )
+async function createStorage(key) {
+  await AsyncStorage.setItem(key, JSON.stringify([]))
+}
 
-  const filterPokemonById = parsePokedex?.filter(
-    pokemon => pokemon.id === data.id,
-  )
+function parseJson(json) {
+  return JSON.parse(json)
+}
 
-  if (!filterPokemonById) {
-    const updatePokemon = {
-      ...filterPokemonById[0],
-      markAs: data.markAs,
-    }
+function removeById(array, id) {
+  return array?.filter(pokemon => pokemon.id !== id)
+}
 
-    await AsyncStorage.setItem(
-      'pokedex',
-      JSON.stringify([...removePokemonById, { ...updatePokemon }]),
-    )
-    console.log('aqui')
+function filterById(array, id) {
+  return array?.filter(pokemon => pokemon.id === id)
+}
+
+function filterByCaptured(array) {
+  return array.filter(pokemon => pokemon?.markAs === 'captured')
+}
+
+async function saveInStorage(key, array) {
+  await AsyncStorage.setItem(key, JSON.stringify(array))
+}
+
+export async function saveDataPokedex(data) {
+  const storage = await getPokedexInStorage('pokedex')
+  const pokedexStorage = parseJson(storage)
+  const removePokemonById = removeById(pokedexStorage, data.id)
+  const filterPokemonById = filterById(pokedexStorage, data.id)
+
+  if (filterPokemonById) {
+    const newStorage = [
+      ...removePokemonById,
+      {
+        ...filterPokemonById[0],
+        markAs: data.markAs,
+      },
+    ]
+    await saveInStorage('pokedex', newStorage)
   } else {
-    await AsyncStorage.setItem(
-      'pokedex',
-      JSON.stringify([...parsePokedex, { ...data }]),
-    )
+    await saveInStorage('pokedex', [...parsePokedex, { ...data }])
   }
 }
 
 export async function chekMarkedAs(id) {
-  const pokedexStorage = await AsyncStorage.getItem('pokedex')
+  const pokedexStorage = await getPokedexInStorage('pokedex')
 
   if (!pokedexStorage) {
     return {
@@ -45,9 +63,8 @@ export async function chekMarkedAs(id) {
     }
   }
 
-  const parsePokedex = JSON.parse(pokedexStorage)
-
-  const pokemonFilter = parsePokedex.filter(pokemon => pokemon?.id === id)
+  const parsePokedex = parseJson(pokedexStorage)
+  const pokemonFilter = filterById(parsePokedex, id)
 
   if (!pokemonFilter !== []) {
     return {
@@ -64,12 +81,10 @@ export async function loadPokedexInStorage() {
 }
 
 export async function loadPokemonsCaptured() {
-  const pokedexStorage = await AsyncStorage.getItem('pokedex')
-  const parsePokedex = JSON.parse(pokedexStorage)
+  const pokedexStorage = await getPokedexInStorage('pokedex')
+  const parsePokedex = parseJson(pokedexStorage)
 
-  const filterPokemonsCaptured = parsePokedex.filter(
-    pokemon => pokemon?.markAs === 'captured',
-  )
+  const filterPokemonsCaptured = filterByCaptured(parsePokedex)
 
   return filterPokemonsCaptured || []
 }
