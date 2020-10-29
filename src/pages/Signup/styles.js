@@ -11,9 +11,9 @@ const Container = styled.SafeAreaView`
 
 const TextMessage = styled.Text`
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   font-family: 'Nunito_700Bold';
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   color: ${colors.dark};
 `
 

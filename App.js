@@ -12,6 +12,7 @@ import {
 import AppStack from './src/routes/AppStack'
 import PokemonProvider from './src/context/Pokemon'
 import ModalProvider from './src/context/Modal'
+import LoadingProvider from './src/context/Loading'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -25,14 +26,16 @@ export default function App() {
   }
 
   return (
-    <PokemonProvider>
-      <ModalProvider>
-        <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
-          <AppStack />
+    <LoadingProvider>
+      <PokemonProvider>
+        <ModalProvider>
+          <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
+            <AppStack />
 
-          <StatusBar style="dark-content" backgroundColor="transparent" />
-        </View>
-      </ModalProvider>
-    </PokemonProvider>
+            <StatusBar style="dark-content" backgroundColor="transparent" />
+          </View>
+        </ModalProvider>
+      </PokemonProvider>
+    </LoadingProvider>
   )
 }

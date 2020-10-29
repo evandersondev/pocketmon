@@ -1,14 +1,16 @@
 {
   "expo": {
-    "name": "pocketmon",
-    "slug": "pocketmon",
+    "name": "Pocketmon",
+    "slug": "Pocketmon",
     "version": "1.0.0",
+    "privacy": "public",
     "orientation": "portrait",
+    "platforms": ["android"],
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f1f2f6"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

@@ -5,9 +5,14 @@ const ButtonContainer = styled.TouchableOpacity`
   width: 100%;
   height: 56px;
   border-radius: 8px;
-  justify-content: center;
+  padding: 0 40px;
+  flex-direction: row;
   align-items: center;
-  background-color: ${colors.primary};
+  justify-content: ${({ type }) =>
+    type === 'facebook' ? 'space-around' : 'center'};
+  align-items: center;
+  background-color: ${({ type }) =>
+    type === 'facebook' ? colors.blue : colors.primary};
 `
 const TextButton = styled.Text`
   font-size: 18px;
@@ -15,7 +20,13 @@ const TextButton = styled.Text`
   color: ${colors.ligth};
 `
 
+export const IconButton = styled.Image`
+  height: 25px;
+  margin-top: 2px;
+`
+
 export default {
   ButtonContainer,
   TextButton,
+  IconButton,
 }

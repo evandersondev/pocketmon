@@ -27,6 +27,8 @@ import logotipo from './images/logotipo.png'
 import close from './images/icons/close.png'
 import search from './images/icons/search.png'
 import arrow from './images/icons/arrow.png'
+import facebook from './images/icons/facebook.png'
+import phone from './images/icons/phone.png'
 
 export const images = {
   fire,
@@ -58,4 +60,6 @@ export const images = {
   landing,
   search,
   arrow,
+  facebook,
+  phone,
 }

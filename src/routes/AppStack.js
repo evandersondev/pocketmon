@@ -27,8 +27,8 @@ function AppStack() {
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
         {landing && <Screen name="Landing" component={Landing} />}
-        <Screen name="Signin" component={Signin} />
         <Screen name="Signup" component={Signup} />
+        <Screen name="Signin" component={Signin} />
         <Screen name="Show" component={Show} />
         <Screen name="PageTabs" component={PageTabs} />
       </Navigator>

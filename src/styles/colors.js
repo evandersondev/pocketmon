@@ -5,6 +5,7 @@ export default {
   gray: '#dfe4ea',
   graffiti: '#9ECBCB',
   card: '#e6fefe',
+  blue: '#1B9CFC',
   type: {
     colors: {
       fire: '#FDDFDF',

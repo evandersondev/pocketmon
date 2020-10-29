@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { usePokemon } from '../../context/Pokemon'
-
+import { usePokemon } from '../../context'
 import { Header, Card } from '../../components'
 import styles from './styles'
 

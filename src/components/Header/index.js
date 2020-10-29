@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import * as Facebook from 'expo-facebook'
 
 import { images } from '../../assets'
 import styles from './styles'
@@ -7,8 +8,13 @@ import styles from './styles'
 export default () => {
   const { navigate } = useNavigation()
 
-  function handleLogout() {
-    navigate('Signin')
+  async function handleLogout() {
+    const auth = await Facebook.getAuthenticationCredentialAsync()
+
+    if (auth) {
+      await Facebook.logOutAsync()
+      navigate('Signin')
+    }
   }
 
   return (

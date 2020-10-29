@@ -11,6 +11,8 @@ const Container = styled.SafeAreaView`
 
 const LogoImage = styled.Image`
   margin-bottom: 30px;
+  width: 250px;
+  height: 250px;
 `
 
 const Form = styled.View`

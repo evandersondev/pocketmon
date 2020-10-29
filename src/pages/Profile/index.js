@@ -59,7 +59,7 @@ export default () => {
       <styles.ShowLandingContainer>
         <styles.TextLanding>Show me lading page</styles.TextLanding>
         <styles.CheckButton onPress={toggleCheck}>
-          <styles.Check source={checked ? CheckedIcon : CheckIcon} />
+          <styles.Check source={checked ? images.checked : images.check} />
         </styles.CheckButton>
       </styles.ShowLandingContainer>
     </styles.ProfileContainer>

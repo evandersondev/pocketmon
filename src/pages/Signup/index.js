@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import * as Linking from 'expo-linking'
 import styles from './styles'
 
 import { Input, Button } from '../../components'
@@ -12,34 +11,31 @@ export default () => {
   const [form, setForm] = useState({
     username: '',
     email: '',
-    password: '',
+    phone: '',
   })
 
-  function haveAccount() {
-    navigate('Signin')
+  function goToGithub() {
+    Linking.openURL('http://github.com')
   }
 
   async function handleFormSubmit() {
     const arrayForm = Object.values(form)
     arrayForm.map(value => {
       if (value === '') {
-        return Alert.alert('Some is wwrong', 'vefiry the fildes and try agin!')
+        return Alert.alert(
+          'Sorry but only one an input can be empty! Check the fields and try again',
+        )
+      } else {
+        navigate('Signin', { form })
       }
     })
-
-    try {
-      await AsyncStorage.setItem('user', JSON.stringify(form))
-      navigate('Signin')
-    } catch (error) {
-      Alert.alert('User not created', 'Maybe some information it wrongs!')
-    }
   }
 
   return (
     <styles.Container>
       <styles.TextMessage>
-        Please, you need to use your github username to get some information for
-        exmaple: Photo, Bio, Email...
+        First of all we need some information to fill in your profile data. It
+        would be interesting if you had an account at Github.
       </styles.TextMessage>
       <styles.Form>
         <Input
@@ -58,26 +54,27 @@ export default () => {
           onChangeText={value => setForm({ ...form, email: value })}
         />
         <Input
-          icon="password"
-          name="password"
-          secureTextEntry={true}
-          placeholder="Password"
-          value={form.password}
-          onChangeText={value => setForm({ ...form, password: value })}
+          icon="phone"
+          name="phone"
+          keyboardType="numeric"
+          maxLength={9}
+          placeholder="Phone|Optional"
+          value={form.phone}
+          onChangeText={value => setForm({ ...form, phone: value })}
         />
 
-        <Button onPress={handleFormSubmit} title="Create account" />
+        <Button onPress={handleFormSubmit} title="Next" />
       </styles.Form>
 
       <styles.CreateAccountContainer>
         <styles.TextCreateAccount>
-          You already have account?
+          Don’t have account on Github?
         </styles.TextCreateAccount>
-        <styles.ButtonCreateAccount onPress={haveAccount}>
+        <styles.ButtonCreateAccount onPress={goToGithub}>
           <styles.TextCreateAccount
             style={{ fontWeight: 'bold', color: '#eb4d4b' }}
           >
-            back to login.
+            click here.
           </styles.TextCreateAccount>
         </styles.ButtonCreateAccount>
       </styles.CreateAccountContainer>
