@@ -19,16 +19,21 @@ export default () => {
   }
 
   async function handleFormSubmit() {
-    const arrayForm = Object.values(form)
-    arrayForm.map(value => {
-      if (value === '') {
-        return Alert.alert(
-          'Sorry but only one an input can be empty! Check the fields and try again',
-        )
-      } else {
-        navigate('Signin', { form })
-      }
-    })
+    // const arrayForm = Object.values(form)
+    // arrayForm.map(value => {
+    //   if (value === '') {
+    //     return Alert.alert(
+    //       'Sorry but only one an input can be empty! Check the fields and try again',
+    //     )
+    //   } else {
+    //     setForm({
+    //       username: '',
+    //       email: '',
+    //       phone: '',
+    //     })
+    //   }
+    // })
+    navigate('Signin')
   }
 
   return (
@@ -42,6 +47,7 @@ export default () => {
           icon="user"
           name="username"
           placeholder="Github username"
+          autoCapitalize="none"
           value={form.username}
           onChangeText={value => setForm({ ...form, username: value })}
         />
@@ -50,6 +56,7 @@ export default () => {
           name="email"
           type="email"
           placeholder="E-mail"
+          autoCapitalize="none"
           value={form.email}
           onChangeText={value => setForm({ ...form, email: value })}
         />
@@ -59,6 +66,7 @@ export default () => {
           keyboardType="numeric"
           maxLength={9}
           placeholder="Phone|Optional"
+          autoCapitalize="none"
           value={form.phone}
           onChangeText={value => setForm({ ...form, phone: value })}
         />

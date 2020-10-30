@@ -1,24 +1,35 @@
 import React, { useState } from 'react'
-import { TouchableOpacity } from 'react-native'
-import { useNavigation, useFocusEffect } from '@react-navigation/native'
+import {
+  useNavigation,
+  useFocusEffect,
+  useIsFocused,
+} from '@react-navigation/native'
 import { loadPokemonsCaptured } from '../../utils'
 import { usePokemon } from '../../context/Pokemon'
-import { images } from '../../assets'
 import { Header, Card } from '../../components'
+import { RectButton } from 'react-native-gesture-handler'
 import styles from './styles'
 
 const Pokedex = () => {
   const { navigate } = useNavigation()
+  const isFocused = useIsFocused()
   const [pokemons, setPokemons] = useState([])
-  const { listPokemonById } = usePokemon()
+  const [pokemonsFiltered, setPokemonFiltered] = useState([])
+  const [searching, setSearch] = useState(false)
+  const { listPokemonById, searckPokemon } = usePokemon()
 
   async function loadPokedex() {
     setPokemons(await loadPokemonsCaptured())
   }
 
-  async function fetchPokemon(id) {
+  async function goToPageShow(id) {
     await listPokemonById(id)
     navigate('Show')
+  }
+
+  function filterPokemonByName(value) {
+    setSearch(true)
+    setPokemonFiltered(searckPokemon(pokemons, value))
   }
 
   useFocusEffect(() => {
@@ -31,39 +42,22 @@ const Pokedex = () => {
       <styles.TitlePokedex>My Pokedex</styles.TitlePokedex>
 
       <styles.InputSearchContainer>
-        <styles.InputSearch placeholder="Filter pokemon" />
-
-        <styles.ButtonSearchContainer>
-          <styles.ButtonSearchImage
-            resizeMode="contain"
-            source={images.search}
-          />
-        </styles.ButtonSearchContainer>
+        <styles.InputSearch
+          onChangeText={filterPokemonByName}
+          placeholder="Filter pokemon"
+        />
       </styles.InputSearchContainer>
 
       <styles.ListView
-        data={pokemons}
+        data={searching ? pokemonsFiltered : pokemons}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => fetchPokemon(item.id)}>
+          <RectButton onPress={() => goToPageShow(item.id)}>
             <Card pokemon={item} type="squad" />
-          </TouchableOpacity>
+          </RectButton>
         )}
         keyExtractor={item => item.name}
         numColumns="2"
-        columnWrapperStyle={{
-          flexGrow: 1,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          width: '100%',
-        }}
-        contentContainerStyle={{
-          // flex: 0.5,
-          width: '100%',
-
-          // height: '100%',
-          flexGrow: 1,
-        }}
+        showsVerticalScrollIndicator={false}
       />
     </styles.PokedexContainer>
   )

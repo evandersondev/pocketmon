@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useNavigation, useIsFocused } from '@react-navigation/native'
+import { RectButton } from 'react-native-gesture-handler'
 import { usePokemon } from '../../context'
 import { Header, Card } from '../../components'
 import styles from './styles'
 
 export default () => {
   const { pokemons, listPokemon, setPokemons, listPokemonById } = usePokemon()
-  const [refreshing, setRefreshing] = useState(false)
+  const [refreshing] = useState(false)
+  const isFocused = useIsFocused()
   const { navigate } = useNavigation()
   const [offset, setOffset] = useState(0)
 
@@ -34,21 +35,22 @@ export default () => {
 
       <styles.TitlePage>Choose your pokemons</styles.TitlePage>
 
-      <styles.ListView
-        data={pokemons}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => goToPageShow(item.id)}>
-            <Card pokemon={item} />
-          </TouchableOpacity>
-        )}
-        keyExtractor={item => item.name}
-        onEndReached={loadMore}
-        onEndReachedThreshold={0.1}
-        refreshing={refreshing}
-        onRefresh={refreshPokemons}
-        showsVerticalScrollIndicator={false}
-        scrollToIndex={params => console.log(params)}
-      />
+      {isFocused && (
+        <styles.ListView
+          data={pokemons}
+          renderItem={({ item }) => (
+            <RectButton onPress={() => goToPageShow(item.id)}>
+              <Card pokemon={item} />
+            </RectButton>
+          )}
+          keyExtractor={item => item.name}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.1}
+          refreshing={refreshing}
+          onRefresh={refreshPokemons}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </styles.ListContainer>
   )
 }

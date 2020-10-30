@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import colors from '../../styles/colors'
 
 const InputContainer = styled.View`
   width: 100%;
@@ -14,7 +15,7 @@ const InputContainer = styled.View`
 const Input = styled.TextInput`
   width: 100%;
   height: 100%;
-  color: #bdc0c5;
+  color: ${colors.dark};
   padding: 0 15px 0 0px;
   border-radius: 8px;
   margin-bottom: 15px;

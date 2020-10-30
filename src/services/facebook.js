@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Facebook from 'expo-facebook'
 
 export async function signUpFacebook() {
@@ -16,15 +15,18 @@ export async function signUpFacebook() {
         `https://graph.facebook.com/me?fields=id,name,picture.type(large)&access_token=${token}`,
       )
 
-      const data = await response.json()
+      const results = await response.json()
 
       const user = {
-        id: data.id,
-        name: data.name,
-        image: data.picture.data.url,
+        id: results.id,
+        name: results.name,
+        image: results.picture.data.url,
+        token,
       }
 
-      await AsyncStorage.setItem('user', JSON.stringify(user))
+      return { ...user }
+    } else {
+      return {}
     }
   } catch ({ message }) {
     alert(`Facebook Login Error: ${message}`)

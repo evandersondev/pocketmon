@@ -26,7 +26,7 @@ function PageTabs() {
         style: {
           elevation: 30,
           shadowOpacity: 2,
-          height: 64,
+          height: 56,
           backgroundColor: colors.ligth,
         },
         tabStyle: {
@@ -41,6 +41,7 @@ function PageTabs() {
         },
         activeBackgroundColor: colors.gray,
         inactiveBackgroundColor: colors.ligth,
+        keyboardHidesTabBar: true,
       }}
     >
       <Screen
@@ -50,9 +51,9 @@ function PageTabs() {
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => {
             return focused ? (
-              <Image source={EggIconSelected} />
+              <Image resizeMode="contain" source={EggIconSelected} />
             ) : (
-              <Image source={EggIcon} />
+              <Image resizeMode="contain" source={EggIcon} />
             )
           },
         }}
@@ -64,9 +65,9 @@ function PageTabs() {
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => {
             return focused ? (
-              <Image source={PokeballIconSelected} />
+              <Image resizeMode="center" source={PokeballIconSelected} />
             ) : (
-              <Image source={PokeballIcon} />
+              <Image resizeMode="contain" source={PokeballIcon} />
             )
           },
         }}
@@ -78,9 +79,9 @@ function PageTabs() {
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => {
             return focused ? (
-              <Image source={ProfileIconSelected} />
+              <Image resizeMode="contain" source={ProfileIconSelected} />
             ) : (
-              <Image source={ProfileIcon} />
+              <Image resizeMode="contain" source={ProfileIcon} />
             )
           },
         }}

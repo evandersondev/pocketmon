@@ -37,6 +37,15 @@ export default function PokemonProvider({ children }) {
     return markAs
   }
 
+  function searckPokemon(array, value) {
+    if (!value) {
+      return array
+    }
+
+    const regexp = new RegExp(value, 'i')
+    return array.filter(({ name }) => regexp.test(name))
+  }
+
   return (
     <PokemonContext.Provider
       value={{
@@ -48,6 +57,7 @@ export default function PokemonProvider({ children }) {
         listPokemonById,
         markedAs,
         setMarkedAs,
+        searckPokemon,
       }}
     >
       {children}
@@ -65,6 +75,7 @@ export function usePokemon() {
     listPokemonById,
     markedAs,
     setMarkedAs,
+    searckPokemon,
   } = useContext(PokemonContext)
   return {
     pokemons,
@@ -75,5 +86,6 @@ export function usePokemon() {
     listPokemonById,
     markedAs,
     setMarkedAs,
+    searckPokemon,
   }
 }

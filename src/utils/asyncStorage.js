@@ -30,8 +30,8 @@ function filterByCaptured(array) {
   return array.filter(pokemon => pokemon?.markAs === 'captured')
 }
 
-async function saveInStorage(key, array) {
-  await AsyncStorage.setItem(key, JSON.stringify(array))
+async function saveInStorage(key, data) {
+  await AsyncStorage.setItem(key, JSON.stringify(data))
 }
 
 export async function saveDataPokedex(data) {
@@ -40,7 +40,7 @@ export async function saveDataPokedex(data) {
   const removePokemonById = removeById(pokedexStorage, data.id)
   const filterPokemonById = filterById(pokedexStorage, data.id)
 
-  if (filterPokemonById) {
+  if (!filterPokemonById) {
     const newStorage = [
       ...removePokemonById,
       {
@@ -50,7 +50,7 @@ export async function saveDataPokedex(data) {
     ]
     await saveInStorage('pokedex', newStorage)
   } else {
-    await saveInStorage('pokedex', [...parsePokedex, { ...data }])
+    await saveInStorage('pokedex', [...pokedexStorage, { ...data }])
   }
 }
 
@@ -86,9 +86,13 @@ export async function loadPokemonsCaptured() {
 
   const filterPokemonsCaptured = filterByCaptured(parsePokedex)
 
-  return filterPokemonsCaptured || []
+  return filterPokemonsCaptured.sort() || []
 }
 
-export async function removePokedexInStorage() {
-  await AsyncStorage.removeItem('pokedex')
+export async function removeDataInStorage(key) {
+  await AsyncStorage.removeItem(key)
+}
+
+export async function saveUserInLocalStorage(data) {
+  await saveInStorage('user', data)
 }

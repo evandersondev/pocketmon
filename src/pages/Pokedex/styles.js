@@ -18,44 +18,23 @@ const InputSearchContainer = styled.View`
   width: 100%;
   height: 56px;
   flex-direction: row;
-  border: 1px solid #bdc0c5;
-  color: #bdc0c5;
+  border: 0.5px solid ${colors.dark};
   border-radius: 8px;
   margin-bottom: 15px;
 `
 
 const InputSearch = styled.TextInput`
-  padding-left: 30px;
-  color: ${colors.gray};
+  padding: 0 35px;
+  color: ${colors.dark};
   font-size: 16px;
 `
 
-const ButtonSearchContainer = styled.TouchableOpacity`
-  width: 76px;
-  height: 100%;
-  background: ${colors.dark};
-  margin-left: auto;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  align-items: center;
-  justify-content: center;
-`
-
-const ButtonSearchImage = styled.Image`
-  width: 25px;
-  height: 25px;
-`
-
-const ListView = styled.FlatList`
-  width: 100%;
-`
+const ListView = styled.FlatList``
 
 export default {
   PokedexContainer,
   TitlePokedex,
   InputSearch,
   InputSearchContainer,
-  ButtonSearchContainer,
-  ButtonSearchImage,
   ListView,
 }
