@@ -1,9 +1,11 @@
 import React from 'react'
+import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
 import { usePokemon } from '../../context/Pokemon'
 import { saveDataPokedex } from '../../utils'
 import { images } from '../../assets'
 import { Modal } from 'react-native'
 import { useModal } from '../../context/Modal'
+import colors from '../../styles/colors'
 import styles from './styles'
 
 export default ({ id, name, image }) => {
@@ -22,23 +24,38 @@ export default ({ id, name, image }) => {
         <styles.ModalContainer>
           <styles.HeaderModal>
             <styles.CloseButton onPress={closeModal}>
-              <styles.CloseImage resizeMode="contain" source={images.close} />
+              <Icon name="close-circle-outline" size={36} color={colors.dark} />
             </styles.CloseButton>
           </styles.HeaderModal>
 
           <styles.BodyContainer>
             <styles.ItemBody onPress={() => markPokemonAs('none')}>
-              <styles.ItemImage resizeMode="contain" source={images.none} />
+              <Icon
+                name="checkbox-blank-outline"
+                style={{ marginRight: 30 }}
+                size={36}
+                color={colors.dark}
+              />
               <styles.ItemText>None</styles.ItemText>
             </styles.ItemBody>
 
             <styles.ItemBody onPress={() => markPokemonAs('visited')}>
-              <styles.ItemImage resizeMode="contain" source={images.visited} />
+              <Icon
+                name="eye"
+                style={{ marginRight: 30 }}
+                size={36}
+                color={colors.dark}
+              />
               <styles.ItemText>Visited</styles.ItemText>
             </styles.ItemBody>
 
             <styles.ItemBody onPress={() => markPokemonAs('captured')}>
-              <styles.ItemImage resizeMode="contain" source={images.captured} />
+              <Icon
+                name="pokeball"
+                style={{ marginRight: 30 }}
+                size={36}
+                color={colors.dark}
+              />
               <styles.ItemText>Captured</styles.ItemText>
             </styles.ItemBody>
           </styles.BodyContainer>

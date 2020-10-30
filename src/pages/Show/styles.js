@@ -52,6 +52,7 @@ const MarkImage = styled.Image`
 const ImageContainer = styled.View`
   height: 400px;
   margin-top: 130px;
+  margin-bottom: 30px;
   justify-content: flex-end;
   align-items: center;
 `
@@ -112,6 +113,7 @@ const TypeImage = styled.Image`
   height: 20px;
   margin-top: 5px;
 `
+
 const TypeText = styled.Text`
   color: ${colors.dark};
   font-size: 20px;
@@ -133,18 +135,11 @@ const MeasuresText = styled.Text`
   font-family: 'Nunito_400Regular';
 `
 
-const StatsContainer = styled.View`
-  padding: 30px 0;
-`
-
 const TitleSession = styled.Text`
   font-size: 26px;
   font-family: 'Nunito_800ExtraBold';
+  color: ${colors.dark};
   margin-bottom: 15px;
-`
-
-const AbilitiesContainer = styled.View`
-  padding-bottom: 60px;
 `
 
 const AbilitiesItemText = styled.Text`
@@ -152,6 +147,36 @@ const AbilitiesItemText = styled.Text`
   font-family: 'Nunito_700Bold';
   margin-bottom: 5px;
   text-transform: capitalize;
+  color: ${colors.dark};
+`
+
+const NotesContainer = styled.View``
+
+const NotesTypeContainer = styled.View`
+  padding-bottom: 30px;
+`
+
+const NotesAddButtonContainer = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const NotesTypeLabel = styled.Text`
+  color: ${colors.dark};
+  font-family: 'Nunito_700Bold';
+  font-size: 20px;
+  margin-bottom: 8px;
+`
+
+const NotesTypeText = styled.Text`
+  color: ${colors.dark};
+  font-size: 18px;
+  font-family: 'Nunito_400Regular';
+`
+
+const SessionContainer = styled.View`
+  padding-bottom: 30px;
 `
 
 export default {
@@ -174,8 +199,12 @@ export default {
   TypeText,
   MeasuresContainer,
   MeasuresText,
-  StatsContainer,
   TitleSession,
-  AbilitiesContainer,
   AbilitiesItemText,
+  NotesContainer,
+  NotesTypeContainer,
+  NotesAddButtonContainer,
+  NotesTypeLabel,
+  NotesTypeText,
+  SessionContainer,
 }

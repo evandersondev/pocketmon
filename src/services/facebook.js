@@ -19,12 +19,16 @@ export async function signUpFacebook() {
 
       const user = {
         id: results.id,
-        name: results.name,
         image: results.picture.data.url,
         token,
+        info: [
+          {
+            name: results.name,
+          },
+        ],
       }
 
-      return { ...user }
+      return user
     } else {
       return {}
     }

@@ -1,21 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Platform, StatusBar } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
 import { usePokemon } from '../../context/Pokemon'
 import { heightInCm, weightInKg } from '../../utils/convertMeasures'
 import { useModal } from '../../context/Modal'
-import { ProgressBar, Modal } from '../../components'
+import { ProgressBar, Modal, Notes } from '../../components'
 import { images } from '../../assets'
 import styles from './styles'
+import colors from '../../styles/colors'
 
 export default () => {
   const { goBack } = useNavigation()
   const { showModal } = useModal()
-  const { pokemon, markedAs } = usePokemon()
+  const { pokemon, markedAs, notes, loadNotesInStorage } = usePokemon()
+  const [modalNotes, setModalNotes] = useState(false)
+
+  async function loadStorage() {
+    await loadNotesInStorage(pokemon.id)
+  }
+
+  useEffect(() => {
+    loadStorage()
+  }, [])
 
   return (
     <>
       <Modal id={pokemon.id} name={pokemon.name} image={pokemon.image} />
+      <Notes
+        id={pokemon.id}
+        modalNotes={modalNotes}
+        setModalNotes={setModalNotes}
+      />
 
       {pokemon && (
         <styles.ShowContainer
@@ -69,7 +85,7 @@ export default () => {
             </styles.BackgroundContainer>
           </styles.ImageContainer>
 
-          <styles.StatsContainer>
+          <styles.SessionContainer>
             <styles.TitleSession>Stats</styles.TitleSession>
             <ProgressBar title="Hp" value={pokemon?.stats?.hp} />
             <ProgressBar title="Attack" value={pokemon?.stats?.attack} />
@@ -83,16 +99,51 @@ export default () => {
               value={pokemon?.stats?.specialDefense}
             />
             <ProgressBar title="Speed" value={pokemon?.stats?.speed} />
-          </styles.StatsContainer>
+          </styles.SessionContainer>
 
-          <styles.AbilitiesContainer>
+          <styles.SessionContainer>
             <styles.TitleSession>Abilities</styles.TitleSession>
             {pokemon?.abilities?.map(({ ability }, index) => (
               <styles.AbilitiesItemText key={ability.name}>
                 {index + 1} - {ability.name}
               </styles.AbilitiesItemText>
             ))}
-          </styles.AbilitiesContainer>
+          </styles.SessionContainer>
+
+          {markedAs === 'captured' && (
+            <styles.SessionContainer>
+              <styles.NotesAddButtonContainer
+                onPress={() => setModalNotes(true)}
+              >
+                <styles.TitleSession>Notes</styles.TitleSession>
+                <Icon
+                  name="plus"
+                  size={36}
+                  style={{ marginBottom: 12 }}
+                  color={colors.dark}
+                />
+              </styles.NotesAddButtonContainer>
+
+              <styles.NotesTypeContainer>
+                <styles.NotesTypeLabel>Habitat</styles.NotesTypeLabel>
+                <styles.NotesTypeText>
+                  {notes.habitat.value}
+                </styles.NotesTypeText>
+              </styles.NotesTypeContainer>
+
+              <styles.NotesTypeContainer>
+                <styles.NotesTypeLabel>Feeding time</styles.NotesTypeLabel>
+                <styles.NotesTypeText>{notes.feed.value}</styles.NotesTypeText>
+              </styles.NotesTypeContainer>
+
+              <styles.NotesTypeContainer>
+                <styles.NotesTypeLabel>Capture location</styles.NotesTypeLabel>
+                <styles.NotesTypeText>
+                  {notes.capture_location.value}
+                </styles.NotesTypeText>
+              </styles.NotesTypeContainer>
+            </styles.SessionContainer>
+          )}
         </styles.ShowContainer>
       )}
     </>

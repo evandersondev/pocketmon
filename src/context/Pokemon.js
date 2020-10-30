@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import api from '../services/api'
-import { chekMarkedAs } from '../utils'
+import { chekMarkedAs, loadPokemonsCapturedByid } from '../utils'
 
 const PokemonContext = createContext()
 
@@ -10,6 +10,20 @@ export default function PokemonProvider({ children }) {
   const [pokemon, setPokemon] = useState({
     abilities: [],
     markAs: 'none',
+  })
+  const [notes, setNotes] = useState({
+    feed: {
+      id: 1,
+      value: '1 times a day',
+    },
+    habitat: {
+      id: 1,
+      value: 'Air',
+    },
+    capture_location: {
+      id: 1,
+      value: 'Brazil',
+    },
   })
 
   async function listPokemon({ offset }) {
@@ -46,6 +60,28 @@ export default function PokemonProvider({ children }) {
     return array.filter(({ name }) => regexp.test(name))
   }
 
+  async function loadNotesInStorage(id) {
+    const pokemon = await loadPokemonsCapturedByid(id)
+    if (pokemon.notes) {
+      setNotes(pokemon.notes)
+    } else {
+      setNotes({
+        feed: {
+          id: 1,
+          value: '1 times a day',
+        },
+        habitat: {
+          id: 1,
+          value: 'Air',
+        },
+        capture_location: {
+          id: 1,
+          value: 'Brazil',
+        },
+      })
+    }
+  }
+
   return (
     <PokemonContext.Provider
       value={{
@@ -58,6 +94,9 @@ export default function PokemonProvider({ children }) {
         markedAs,
         setMarkedAs,
         searckPokemon,
+        notes,
+        setNotes,
+        loadNotesInStorage,
       }}
     >
       {children}
@@ -76,6 +115,9 @@ export function usePokemon() {
     markedAs,
     setMarkedAs,
     searckPokemon,
+    notes,
+    setNotes,
+    loadNotesInStorage,
   } = useContext(PokemonContext)
   return {
     pokemons,
@@ -87,5 +129,8 @@ export function usePokemon() {
     markedAs,
     setMarkedAs,
     searckPokemon,
+    notes,
+    setNotes,
+    loadNotesInStorage,
   }
 }

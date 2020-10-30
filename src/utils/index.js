@@ -2,14 +2,20 @@ import {
   saveDataPokedex,
   chekMarkedAs,
   loadPokedexInStorage,
-  removePokedexInStorage,
+  removeDataInStorage,
   loadPokemonsCaptured,
+  getUserInLocalStorage,
+  addNotesPokemonByid,
+  loadPokemonsCapturedByid,
 } from './asyncStorage'
 
 export {
   saveDataPokedex,
   chekMarkedAs,
   loadPokedexInStorage,
-  removePokedexInStorage,
+  removeDataInStorage,
   loadPokemonsCaptured,
+  getUserInLocalStorage,
+  addNotesPokemonByid,
+  loadPokemonsCapturedByid,
 }

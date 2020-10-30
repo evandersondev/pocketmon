@@ -33,6 +33,7 @@ const LabelInfoText = styled.Text`
   font-family: 'Nunito_700Bold';
   font-size: 18px;
   color: ${colors.dark};
+  text-transform: capitalize;
 `
 
 const ValueInfoText = styled.Text`
@@ -41,18 +42,36 @@ const ValueInfoText = styled.Text`
   color: ${colors.dark};
 `
 
+const AddInfoButton = styled.TouchableOpacity`
+  width: 100%;
+  margin-top: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px 30px;
+  background: ${colors.gray};
+`
+
+const TextAddInfo = styled.Text`
+  font-size: 16px;
+  color: ${colors.dark};
+  font-family: 'Nunito_700Bold';
+`
+
 const ShowLandingContainer = styled.View`
   width: 100%;
   flex-direction: row;
-  margin-top: auto;
-  margin-bottom: 20px;
-  justify-content: space-around;
+  margin: 30px 0;
+  justify-content: center;
   align-items: center;
 `
 
 const TextLanding = styled.Text`
-  font-size: 14px;
+  font-size: 13px;
   color: ${colors.dark};
+  text-transform: uppercase;
+  margin-right: 15px;
 `
 
 const CheckButton = styled.TouchableOpacity`
@@ -73,4 +92,6 @@ export default {
   TextLanding,
   CheckButton,
   Check,
+  AddInfoButton,
+  TextAddInfo,
 }

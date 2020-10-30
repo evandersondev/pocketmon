@@ -12,7 +12,6 @@ import styles from './styles'
 
 const Pokedex = () => {
   const { navigate } = useNavigation()
-  const isFocused = useIsFocused()
   const [pokemons, setPokemons] = useState([])
   const [pokemonsFiltered, setPokemonFiltered] = useState([])
   const [searching, setSearch] = useState(false)

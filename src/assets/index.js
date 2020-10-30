@@ -17,17 +17,12 @@ import captured from './images/icons/captured.png'
 import none from './images/icons/check.png'
 import landing from './images/landing.png'
 import check from './images/icons/check.png'
-import checked from './images/icons/checked.png'
-import logout from './images/icons/logout.png'
 import logo from './images/logo.png'
 import user from './images/icons/user.png'
 import email from './images/icons/email.png'
 import password from './images/icons/password.png'
 import logotipo from './images/logotipo.png'
-import close from './images/icons/close.png'
-import search from './images/icons/search.png'
 import arrow from './images/icons/arrow.png'
-import facebook from './images/icons/facebook.png'
 import phone from './images/icons/phone.png'
 
 export const images = {
@@ -48,18 +43,13 @@ export const images = {
   visited,
   captured,
   none,
-  logout,
   logo,
   user,
   email,
   password,
   logotipo,
-  close,
   check,
-  checked,
   landing,
-  search,
   arrow,
-  facebook,
   phone,
 }

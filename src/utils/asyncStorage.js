@@ -75,6 +75,7 @@ export async function chekMarkedAs(id) {
 
 export async function loadPokedexInStorage() {
   const pokedexStorage = await AsyncStorage.getItem('pokedex')
+
   const parsePokedex = JSON.parse(pokedexStorage)
 
   return parsePokedex || []
@@ -82,6 +83,10 @@ export async function loadPokedexInStorage() {
 
 export async function loadPokemonsCaptured() {
   const pokedexStorage = await getPokedexInStorage('pokedex')
+
+  if (!pokedexStorage) {
+    return []
+  }
   const parsePokedex = parseJson(pokedexStorage)
 
   const filterPokemonsCaptured = filterByCaptured(parsePokedex)
@@ -95,4 +100,47 @@ export async function removeDataInStorage(key) {
 
 export async function saveUserInLocalStorage(data) {
   await saveInStorage('user', data)
+}
+
+export async function getUserInLocalStorage() {
+  const user = parseJson(await AsyncStorage.getItem('user'))
+  return user
+}
+
+export async function addNotesPokemonByid(id, notes) {
+  const storage = await loadPokemonsCaptured()
+
+  const removePokemonById = removeById(storage, id)
+  const filterPokemonById = filterById(storage, id)
+
+  const newStorage = [
+    ...removePokemonById,
+    {
+      ...filterPokemonById[0],
+      notes,
+    },
+  ]
+
+  try {
+    await saveInStorage('pokedex', newStorage)
+    return true
+  } catch (err) {
+    return false
+  }
+}
+
+export async function loadPokemonsCapturedByid(id) {
+  const storage = await loadPokemonsCaptured()
+
+  if (!storage) {
+    return {}
+  }
+
+  const filterPokemonById = filterById(storage, id)
+
+  if (filterPokemonById.length === 0) {
+    return {}
+  } else {
+    return filterPokemonById[0]
+  }
 }

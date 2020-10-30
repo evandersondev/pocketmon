@@ -26,7 +26,7 @@ const PokemonIdContainer = styled.View`
   width: ${({ type }) => (type === 'squad' ? '30px' : '70px')};
   height: ${({ type }) => (type === 'squad' ? '30px' : '70px')};
   background: ${({ type }) =>
-    type === 'squad' ? 'transparent' : `${colors.primary}12`};
+    type === 'squad' ? 'transparent' : `${colors.primary}30`};
   border-radius: 35px;
   align-items: center;
   justify-content: center;

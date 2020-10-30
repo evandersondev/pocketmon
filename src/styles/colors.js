@@ -2,9 +2,9 @@ export default {
   primary: '#ff6348',
   ligth: '#f1f2f6',
   dark: '#2f3542',
-  gray: '#dfe4ea',
-  graffiti: '#9ECBCB',
-  card: '#e6fefe',
+  gray: '#ced6e0',
+  graffiti: '#57606f',
+  card: '#dfe4ea',
   blue: '#1B9CFC',
   type: {
     colors: {

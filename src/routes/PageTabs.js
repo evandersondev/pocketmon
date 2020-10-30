@@ -1,21 +1,10 @@
 import React from 'react'
-import { Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
+import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
+import colors from '../styles/colors'
 import List from '../pages/List'
 import Pokedex from '../pages/Pokedex'
 import Profile from '../pages/Profile'
-
-// Icons
-import EggIcon from '../assets/images/icons/egg.png'
-import PokeballIcon from '../assets/images/icons/pokeball.png'
-import ProfileIcon from '../assets/images/icons/profile.png'
-
-import EggIconSelected from '../assets/images/icons/egg-selected.png'
-import PokeballIconSelected from '../assets/images/icons/pokeball-selected.png'
-import ProfileIconSelected from '../assets/images/icons/profile-selected.png'
-
-import colors from '../styles/colors'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -26,21 +15,23 @@ function PageTabs() {
         style: {
           elevation: 30,
           shadowOpacity: 2,
-          height: 56,
+          height: 64,
           backgroundColor: colors.ligth,
         },
         tabStyle: {
-          flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
         },
+        labelStyle: {
+          fontFamily: 'Nunito_700Bold',
+          fontSize: 11,
+        },
         iconStyle: {
           flex: 0,
-          width: 20,
-          height: 20,
+          width: 25,
+          height: 25,
         },
-        activeBackgroundColor: colors.gray,
-        inactiveBackgroundColor: colors.ligth,
+        activeTintColor: colors.primary,
         keyboardHidesTabBar: true,
       }}
     >
@@ -48,42 +39,30 @@ function PageTabs() {
         name="List"
         component={List}
         options={{
-          tabBarLabel: '',
-          tabBarIcon: ({ focused }) => {
-            return focused ? (
-              <Image resizeMode="contain" source={EggIconSelected} />
-            ) : (
-              <Image resizeMode="contain" source={EggIcon} />
-            )
-          },
+          tabBarLabel: 'List',
+          tabBarIcon: ({ size, color }) => (
+            <Icon name="apps" size={size} color={color} />
+          ),
         }}
       />
       <Screen
         name="Pokedex"
         component={Pokedex}
         options={{
-          tabBarLabel: '',
-          tabBarIcon: ({ focused }) => {
-            return focused ? (
-              <Image resizeMode="center" source={PokeballIconSelected} />
-            ) : (
-              <Image resizeMode="contain" source={PokeballIcon} />
-            )
-          },
+          tabBarLabel: 'Pokedex',
+          tabBarIcon: ({ size, color }) => (
+            <Icon name="pokeball" size={size} color={color} />
+          ),
         }}
       />
       <Screen
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: '',
-          tabBarIcon: ({ focused }) => {
-            return focused ? (
-              <Image resizeMode="contain" source={ProfileIconSelected} />
-            ) : (
-              <Image resizeMode="contain" source={ProfileIcon} />
-            )
-          },
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ size, color }) => (
+            <Icon name="account-outline" size={size} color={color} />
+          ),
         }}
       />
     </Navigator>
