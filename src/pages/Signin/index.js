@@ -20,8 +20,8 @@ export default () => {
 
   return (
     <styles.Container>
-      <styles.LogoImage resizeMode="contain" source={images.logotipo} />
       <styles.Form>
+        <styles.LogoImage resizeMode="contain" source={images.logotipo} />
         <Button
           title="Login with Facebook"
           icon="facebook"
@@ -29,22 +29,9 @@ export default () => {
         />
       </styles.Form>
 
-      <styles.CreateAccountContainer>
-        <styles.TextCreateAccount>Don’t have account?</styles.TextCreateAccount>
-        <styles.ButtonCreateAccount>
-          <styles.TextCreateAccount
-            style={{ fontWeight: 'bold', color: '#eb4d4b' }}
-          >
-            create here.
-          </styles.TextCreateAccount>
-        </styles.ButtonCreateAccount>
-      </styles.CreateAccountContainer>
-
-      <Button
-        title="Create new user"
-        type="outline"
-        onPress={() => navigate('Signup')}
-      />
+      <styles.VersionInfoContainer>
+        <styles.VersionInfoText>version 1.0.0</styles.VersionInfoText>
+      </styles.VersionInfoContainer>
     </styles.Container>
   )
 }

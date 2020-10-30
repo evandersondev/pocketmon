@@ -6,7 +6,7 @@ const Container = styled.SafeAreaView`
   background-color: ${colors.ligth};
   align-items: center;
   justify-content: center;
-  padding: 0 30px;
+  padding: 30px;
 `
 
 const LogoImage = styled.Image`
@@ -18,34 +18,30 @@ const LogoImage = styled.Image`
 const Form = styled.View`
   width: 100%;
   margin-bottom: 25px;
+  margin-top: auto;
+  align-items: center;
 `
 
-const CreateAccountContainer = styled.View`
+const VersionInfoContainer = styled.View`
   width: 100%;
   height: 56px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-top: auto;
 `
 
-const TextCreateAccount = styled.Text`
-  color: ${colors.dark};
-  font-size: 14px;
-`
-
-const ButtonCreateAccount = styled.TouchableOpacity`
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 0 8px;
+const VersionInfoText = styled.Text`
+  font-size: 11px;
+  font-family: 'Nunito_400Regular';
+  text-transform: uppercase;
+  color: ${colors.graffiti};
 `
 
 export default {
   Container,
   LogoImage,
   Form,
-  CreateAccountContainer,
-  TextCreateAccount,
-  ButtonCreateAccount,
+  VersionInfoContainer,
+  VersionInfoText,
 }

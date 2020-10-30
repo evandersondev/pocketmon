@@ -3,7 +3,7 @@ import * as Facebook from 'expo-facebook'
 export async function signUpFacebook() {
   try {
     await Facebook.initializeAsync({
-      appId: '970285356792125',
+      appId: process.env.APP_ID,
     })
 
     const { type, token } = await Facebook.logInWithReadPermissionsAsync({
