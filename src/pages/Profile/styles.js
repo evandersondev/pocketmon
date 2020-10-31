@@ -9,14 +9,14 @@ const ProfileContainer = styled.View`
 
 const TitleSession = styled.Text`
   font-family: 'Nunito_800ExtraBold';
-  font-size: 32px;
+  font-size: 26px;
   margin-bottom: 20px;
   color: ${colors.dark};
 `
 
 const ImageProfile = styled.Image`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border-radius: 75px;
   margin: 0 auto;
 `

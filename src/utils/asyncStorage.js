@@ -40,12 +40,30 @@ export async function saveDataPokedex(data) {
   const removePokemonById = removeById(pokedexStorage, data.id)
   const filterPokemonById = filterById(pokedexStorage, data.id)
 
-  if (!filterPokemonById) {
+  if (filterPokemonById[0]) {
     const newStorage = [
       ...removePokemonById,
       {
         ...filterPokemonById[0],
         markAs: data.markAs,
+        notes:
+          data.markAs === 'none'
+            ? {
+                enable: false,
+                feed: {
+                  id: 1,
+                  value: '1 times a day',
+                },
+                habitat: {
+                  id: 1,
+                  value: 'Air',
+                },
+                capture_location: {
+                  id: 1,
+                  value: 'Brazil',
+                },
+              }
+            : { ...filterPokemonById[0].notes, enable: false },
       },
     ]
     await saveInStorage('pokedex', newStorage)

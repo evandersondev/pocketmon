@@ -1,11 +1,11 @@
-import { useModal, ModalProvider } from './Modal'
+import { useMark, MarkProvider } from './Mark'
 import { usePokemon, PokemonProvider } from './Pokemon'
 import { useAuth, AuthProvider } from './Auth'
 import { useLanding, LandingProvider } from './Landing'
 
 export {
-  useModal,
-  ModalProvider,
+  useMark,
+  MarkProvider,
   usePokemon,
   PokemonProvider,
   useAuth,

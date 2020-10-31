@@ -13,7 +13,7 @@ import {
 import Routes from './src/routes'
 import {
   PokemonProvider,
-  ModalProvider,
+  MarkProvider,
   AuthProvider,
   LandingProvider,
 } from './src/contexts'
@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <PokemonProvider>
-      <ModalProvider>
+      <MarkProvider>
         <LandingProvider>
           <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
             <NavigationContainer>
@@ -43,7 +43,7 @@ export default function App() {
             <StatusBar style="dark-content" backgroundColor="transparent" />
           </View>
         </LandingProvider>
-      </ModalProvider>
+      </MarkProvider>
     </PokemonProvider>
   )
 }

@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 import { Dimensions } from 'react-native'
 import colors from '../../styles/colors'
 
-const ModelScreen = styled.View`
+const MarkScreen = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -10,7 +10,7 @@ const ModelScreen = styled.View`
   background: ${colors.dark}aa;
 `
 
-const ModalContainer = styled.View`
+const MarkContainer = styled.View`
   width: ${Dimensions.get('screen').width - 60}px;
   height: ${Dimensions.get('screen').width - 60}px;
   background: ${colors.ligth};
@@ -18,7 +18,7 @@ const ModalContainer = styled.View`
   border-radius: 8px;
 `
 
-const HeaderModal = styled.View`
+const MarkHeader = styled.View`
   width: 105%;
   height: 15px;
   flex-direction: row;
@@ -65,9 +65,9 @@ const ItemText = styled.Text`
 `
 
 export default {
-  ModelScreen,
-  ModalContainer,
-  HeaderModal,
+  MarkScreen,
+  MarkContainer,
+  MarkHeader,
   CloseButton,
   CloseImage,
   BodyContainer,

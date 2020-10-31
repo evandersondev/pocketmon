@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { Platform, StatusBar } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import { usePokemon, useModal } from '../../contexts'
+import { usePokemon, useMark } from '../../contexts'
 import { heightInCm, weightInKg } from '../../utils'
-import { ProgressBar, Modal, Notes } from '../../components'
+import { ProgressBar, Mark, Notes } from '../../components'
 import { images } from '../../assets'
 import colors from '../../styles/colors'
 import styles from './styles'
 
 export default () => {
   const { goBack } = useNavigation()
-  const { showModal } = useModal()
+  const { showMark } = useMark()
   const { pokemon, markedAs, notes, loadNotesInStorage } = usePokemon()
   const [modalNotes, setModalNotes] = useState(false)
 
@@ -21,11 +21,11 @@ export default () => {
 
   useEffect(() => {
     loadStorage()
-  }, [notes])
+  }, [modalNotes])
 
   return (
     <>
-      <Modal id={pokemon.id} name={pokemon.name} image={pokemon.image} />
+      <Mark id={pokemon.id} name={pokemon.name} image={pokemon.image} />
       <Notes
         id={pokemon.id}
         modalNotes={modalNotes}
@@ -44,7 +44,7 @@ export default () => {
               <styles.BackImage resizeMode="contain" source={images.arrow} />
             </styles.BackContainer>
 
-            <styles.MarkContainer onPress={showModal}>
+            <styles.MarkContainer onPress={showMark}>
               <styles.MarkText>Mark as</styles.MarkText>
               <styles.MarkImageContainer>
                 <styles.MarkImage

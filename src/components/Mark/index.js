@@ -1,30 +1,30 @@
 import React from 'react'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import { usePokemon, useModal } from '../../contexts'
+import { usePokemon, useMark } from '../../contexts'
 import { saveDataPokedex } from '../../utils'
 import { Modal } from 'react-native'
 import colors from '../../styles/colors'
 import styles from './styles'
 
 export default ({ id, name, image }) => {
-  const { closeModal, modal } = useModal()
+  const { closeMark, mark } = useMark()
   const { setMarkedAs } = usePokemon()
 
   async function markPokemonAs(markAs) {
     await saveDataPokedex({ id, name, image, markAs })
     setMarkedAs(markAs)
-    closeModal()
+    closeMark()
   }
 
   return (
-    <Modal transparent={true} visible={modal.enable}>
-      <styles.ModelScreen>
-        <styles.ModalContainer>
-          <styles.HeaderModal>
-            <styles.CloseButton onPress={closeModal}>
+    <Modal transparent={true} visible={mark.enable}>
+      <styles.MarkScreen>
+        <styles.MarkContainer>
+          <styles.MarkHeader>
+            <styles.CloseButton onPress={closeMark}>
               <Icon name="close-circle-outline" size={36} color={colors.dark} />
             </styles.CloseButton>
-          </styles.HeaderModal>
+          </styles.MarkHeader>
 
           <styles.BodyContainer>
             <styles.ItemBody onPress={() => markPokemonAs('none')}>
@@ -57,8 +57,8 @@ export default ({ id, name, image }) => {
               <styles.ItemText>Captured</styles.ItemText>
             </styles.ItemBody>
           </styles.BodyContainer>
-        </styles.ModalContainer>
-      </styles.ModelScreen>
+        </styles.MarkContainer>
+      </styles.MarkScreen>
     </Modal>
   )
 }
