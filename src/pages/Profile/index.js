@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 import { Header } from '../../components'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import { getUserInLocalStorage, shouldToShowLading } from '../../utils'
+import { getUserInLocalStorage } from '../../utils'
+import { useLanding } from '../../contexts'
 import styles from './styles'
 import colors from '../../styles/colors'
 
 export default () => {
   const isFocused = useIsFocused()
-  const [profile, setProfile] = useState({})
-  const [checked, setChecked] = useState(true)
+  const { check, showLanding } = useLanding()
+  const [user, setUser] = useState({})
 
   async function loadUserProfile() {
-    setProfile(await getUserInLocalStorage())
+    setUser(await getUserInLocalStorage())
   }
 
   useEffect(() => {
@@ -20,32 +21,25 @@ export default () => {
   }, [])
 
   async function toggleCheck() {
-    setChecked(!checked)
-    await shouldToShowLading(checked)
-    console.log(checked)
+    await showLanding()
   }
 
   return (
     <styles.ProfileContainer>
-      {isFocused && profile.info && (
+      {isFocused && user && (
         <>
           <Header />
           <styles.TitleSession>Profile</styles.TitleSession>
           <styles.ImageProfile
             resizeMode="contain"
-            source={{ uri: profile.image }}
+            source={{ uri: user.image }}
           />
 
           <styles.BodyContainer>
-            {profile?.info.map(item => {
-              const keys = Object.keys(item)
-              return keys.map(key => (
-                <styles.InfoContainer key={key}>
-                  <styles.LabelInfoText>{key}</styles.LabelInfoText>
-                  <styles.ValueInfoText>{item.name}</styles.ValueInfoText>
-                </styles.InfoContainer>
-              ))
-            })}
+            <styles.InfoContainer>
+              <styles.LabelInfoText>Name</styles.LabelInfoText>
+              <styles.ValueInfoText>{user.name}</styles.ValueInfoText>
+            </styles.InfoContainer>
           </styles.BodyContainer>
 
           <styles.AddInfoButton>
@@ -56,7 +50,7 @@ export default () => {
           <styles.ShowLandingContainer>
             <styles.TextLanding>Show me lading page</styles.TextLanding>
             <styles.CheckButton onPress={toggleCheck}>
-              {checked ? (
+              {check ? (
                 <Icon name="check-box-outline" color={colors.dark} size={24} />
               ) : (
                 <Icon

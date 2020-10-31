@@ -11,7 +11,12 @@ import {
 } from '@expo-google-fonts/nunito'
 
 import Routes from './src/routes'
-import { PokemonProvider, ModalProvider, AuthProvider } from './src/contexts'
+import {
+  PokemonProvider,
+  ModalProvider,
+  AuthProvider,
+  LandingProvider,
+} from './src/contexts'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,15 +32,17 @@ export default function App() {
   return (
     <PokemonProvider>
       <ModalProvider>
-        <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
-          <NavigationContainer>
-            <AuthProvider>
-              <Routes />
-            </AuthProvider>
-          </NavigationContainer>
+        <LandingProvider>
+          <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
+            <NavigationContainer>
+              <AuthProvider>
+                <Routes />
+              </AuthProvider>
+            </NavigationContainer>
 
-          <StatusBar style="dark-content" backgroundColor="transparent" />
-        </View>
+            <StatusBar style="dark-content" backgroundColor="transparent" />
+          </View>
+        </LandingProvider>
       </ModalProvider>
     </PokemonProvider>
   )

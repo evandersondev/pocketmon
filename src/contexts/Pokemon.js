@@ -12,6 +12,7 @@ export function PokemonProvider({ children }) {
     markAs: 'none',
   })
   const [notes, setNotes] = useState({
+    enable: false,
     feed: {
       id: 1,
       value: '1 times a day',
@@ -63,9 +64,13 @@ export function PokemonProvider({ children }) {
   async function loadNotesInStorage(id) {
     const pokemon = await loadPokemonsCapturedByid(id)
     if (pokemon.notes) {
-      setNotes(pokemon.notes)
+      setNotes({
+        ...pokemon.notes,
+        enable: true,
+      })
     } else {
       setNotes({
+        enable: false,
         feed: {
           id: 1,
           value: '1 times a day',

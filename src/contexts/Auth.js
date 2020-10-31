@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
 
   async function signIn() {
     const { token, user } = await facebook.signUpFacebook()
-    falseg
     setUser(user)
     await AsyncStorage.setItem('@PMON:user', JSON.stringify(user))
     await AsyncStorage.setItem('@PMON:token', token)

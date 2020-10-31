@@ -32,7 +32,7 @@ export default () => {
         setModalNotes={setModalNotes}
       />
 
-      {pokemon && (
+      {pokemon && notes && (
         <styles.ShowContainer
           style={{
             paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
@@ -123,24 +123,32 @@ export default () => {
                 />
               </styles.NotesAddButtonContainer>
 
-              <styles.NotesTypeContainer>
-                <styles.NotesTypeLabel>Habitat</styles.NotesTypeLabel>
-                <styles.NotesTypeText>
-                  {notes.habitat.value}
-                </styles.NotesTypeText>
-              </styles.NotesTypeContainer>
+              {notes.enable && (
+                <>
+                  <styles.NotesTypeContainer>
+                    <styles.NotesTypeLabel>Habitat</styles.NotesTypeLabel>
+                    <styles.NotesTypeText>
+                      {notes.habitat.value}
+                    </styles.NotesTypeText>
+                  </styles.NotesTypeContainer>
 
-              <styles.NotesTypeContainer>
-                <styles.NotesTypeLabel>Feeding time</styles.NotesTypeLabel>
-                <styles.NotesTypeText>{notes.feed.value}</styles.NotesTypeText>
-              </styles.NotesTypeContainer>
+                  <styles.NotesTypeContainer>
+                    <styles.NotesTypeLabel>Feeding time</styles.NotesTypeLabel>
+                    <styles.NotesTypeText>
+                      {notes.feed.value}
+                    </styles.NotesTypeText>
+                  </styles.NotesTypeContainer>
 
-              <styles.NotesTypeContainer>
-                <styles.NotesTypeLabel>Capture location</styles.NotesTypeLabel>
-                <styles.NotesTypeText>
-                  {notes.capture_location.value}
-                </styles.NotesTypeText>
-              </styles.NotesTypeContainer>
+                  <styles.NotesTypeContainer>
+                    <styles.NotesTypeLabel>
+                      Capture location
+                    </styles.NotesTypeLabel>
+                    <styles.NotesTypeText>
+                      {notes.capture_location.value}
+                    </styles.NotesTypeText>
+                  </styles.NotesTypeContainer>
+                </>
+              )}
             </styles.SessionContainer>
           )}
         </styles.ShowContainer>

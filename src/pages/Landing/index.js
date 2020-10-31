@@ -1,19 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { images } from '../../assets'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
 import { Button } from '../../components'
+import { useLanding } from '../../contexts'
 import colors from '../../styles/colors'
 import styles from './styles'
 
 export default () => {
   const { navigate } = useNavigation()
-  const [checked, setChecked] = useState(true)
+  const { check, showLanding } = useLanding()
 
   async function toggleCheck() {
-    setChecked(!checked)
-    await AsyncStorage.setItem('show_landing', checked ? 'check' : 'checked')
+    await showLanding()
   }
 
   return (
@@ -34,7 +33,7 @@ export default () => {
       <styles.ShowLanding>
         <styles.TextLanding>Always show me this page</styles.TextLanding>
         <styles.CheckButton onPress={toggleCheck}>
-          {checked ? (
+          {check ? (
             <Icon name="check-box-outline" color={colors.dark} size={24} />
           ) : (
             <Icon name="checkbox-blank-outline" color={colors.dark} size={24} />

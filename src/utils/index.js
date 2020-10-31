@@ -8,6 +8,7 @@ import {
   addNotesPokemonByid,
   loadPokemonsCapturedByid,
   shouldToShowLading,
+  checkIfShowLandingInStorage,
 } from './asyncStorage'
 
 import { heightInCm, weightInKg } from './convertMeasures'
@@ -22,6 +23,7 @@ export {
   addNotesPokemonByid,
   loadPokemonsCapturedByid,
   shouldToShowLading,
+  checkIfShowLandingInStorage,
   heightInCm,
   weightInKg,
 }

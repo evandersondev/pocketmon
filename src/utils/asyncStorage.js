@@ -99,7 +99,7 @@ export async function removeDataInStorage(key) {
 }
 
 export async function getUserInLocalStorage() {
-  const user = parseJson(await AsyncStorage.getItem('user'))
+  const user = parseJson(await AsyncStorage.getItem('@PMON:user'))
   return user
 }
 
@@ -142,10 +142,18 @@ export async function loadPokemonsCapturedByid(id) {
 }
 
 export async function shouldToShowLading(value) {
-  console.log(value)
-  if (!value) {
-    // await AsyncStorage.setItem('show_landing', 'checked')
+  if (value) {
+    await AsyncStorage.setItem('show_landing', 'check')
   } else {
-    // await AsyncStorage.setItem('show_landing', 'check')
+    await AsyncStorage.setItem('show_landing', 'checked')
+  }
+}
+
+export async function checkIfShowLandingInStorage() {
+  const result = await AsyncStorage.getItem('show_landing')
+  if (result === 'check') {
+    return true
+  } else {
+    return false
   }
 }
