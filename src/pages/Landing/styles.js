@@ -20,14 +20,7 @@ const Title = styled.Text`
 
 const Image = styled.Image`
   margin-bottom: 15px;
-`
-
-const SubTitle = styled.Text`
-  font-size: 24px;
-  text-align: center;
-  font-family: 'Nunito_700Bold';
-  margin-bottom: 20px;
-  color: ${colors.dark};
+  height: 150px;
 `
 
 const Info = styled.Text`
@@ -61,7 +54,6 @@ export default {
   LandingContainer,
   Title,
   Image,
-  SubTitle,
   Info,
   ShowLanding,
   TextLanding,

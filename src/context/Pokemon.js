@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
-import api from '../services/api'
+import { pokeapi } from '../services'
 import { chekMarkedAs, loadPokemonsCapturedByid } from '../utils'
 
 const PokemonContext = createContext()
@@ -29,16 +29,16 @@ export default function PokemonProvider({ children }) {
   async function listPokemon({ offset }) {
     if (offset === 0) {
       setPokemons([])
-      const { data } = await api.getAllPokemons({ offset })
+      const { data } = await pokeapi.getAllPokemons({ offset })
       setPokemons([...data])
     } else {
-      const { data } = await api.getAllPokemons({ offset })
+      const { data } = await pokeapi.getAllPokemons({ offset })
       setPokemons([...pokemons, ...data])
     }
   }
 
   async function listPokemonById(id) {
-    const results = await api.getPokemonById(id)
+    const results = await pokeapi.getPokemonById(id)
     const markAs = await getMarkPokemon(id)
 
     setMarkedAs(markAs ?? 'none')

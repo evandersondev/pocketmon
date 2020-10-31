@@ -5,10 +5,7 @@ import styles from './styles'
 
 export default ({ title, type, icon, ...rest }) => (
   <styles.ButtonContainer type={type} icon={icon} {...rest}>
-    {icon && (
-      // <styles.IconButton resizeMode="contain" source={images.facebook} />
-      <Icon name="facebook" size={28} color={colors.ligth} />
-    )}
+    {icon && <Icon name="facebook" size={28} color={colors.ligth} />}
     <styles.TextButton type={type}>{title}</styles.TextButton>
   </styles.ButtonContainer>
 )

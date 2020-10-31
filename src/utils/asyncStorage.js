@@ -144,3 +144,12 @@ export async function loadPokemonsCapturedByid(id) {
     return filterPokemonById[0]
   }
 }
+
+export async function shouldToShowLading(value) {
+  console.log(value)
+  if (!value) {
+    // await AsyncStorage.setItem('show_landing', 'checked')
+  } else {
+    // await AsyncStorage.setItem('show_landing', 'check')
+  }
+}

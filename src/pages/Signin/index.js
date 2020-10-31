@@ -4,7 +4,6 @@ import { facebook } from '../../services'
 import { saveUserInLocalStorage } from '../../utils/asyncStorage'
 import { images } from '../../assets'
 import { Button } from '../../components'
-
 import styles from './styles'
 
 export default () => {

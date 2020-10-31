@@ -1,6 +1,5 @@
 import React from 'react'
 import Progress from 'react-native-progress/Bar'
-
 import styles from './styles'
 
 export default ({ title, value = 0 }) => (

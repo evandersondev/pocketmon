@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native'
 import { Header } from '../../components'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { images } from '../../assets'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import { getUserInLocalStorage } from '../../utils'
+import { getUserInLocalStorage, shouldToShowLading } from '../../utils'
 import styles from './styles'
 import colors from '../../styles/colors'
 
@@ -23,10 +21,8 @@ export default () => {
 
   async function toggleCheck() {
     setChecked(!checked)
-    await AsyncStorage.setItem(
-      'show_landing',
-      checked ? images.check : images.checked,
-    )
+    await shouldToShowLading(checked)
+    console.log(checked)
   }
 
   return (

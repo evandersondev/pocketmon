@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import Landing from '../pages/Landing'
 import Signin from '../pages/Signin'
-import Signup from '../pages/Signup'
 import Show from '../pages/Show'
 import PageTabs from './PageTabs'
 
@@ -27,7 +26,6 @@ function AppStack() {
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
         {landing && <Screen name="Landing" component={Landing} />}
-        <Screen name="Signup" component={Signup} />
         <Screen name="Signin" component={Signin} />
         <Screen name="Show" component={Show} />
         <Screen name="PageTabs" component={PageTabs} />

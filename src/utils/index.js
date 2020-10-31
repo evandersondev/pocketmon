@@ -7,7 +7,10 @@ import {
   getUserInLocalStorage,
   addNotesPokemonByid,
   loadPokemonsCapturedByid,
+  shouldToShowLading,
 } from './asyncStorage'
+
+import { heightInCm, weightInKg } from './convertMeasures'
 
 export {
   saveDataPokedex,
@@ -18,4 +21,7 @@ export {
   getUserInLocalStorage,
   addNotesPokemonByid,
   loadPokemonsCapturedByid,
+  shouldToShowLading,
+  heightInCm,
+  weightInKg,
 }

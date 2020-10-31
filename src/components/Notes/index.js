@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
-import { useFocusEffect, useIsFocused } from '@react-navigation/native'
+import React from 'react'
+import { useIsFocused } from '@react-navigation/native'
 import { Modal } from 'react-native'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
 import { addNotesPokemonByid } from '../../utils'
 import { usePokemon } from '../../context/Pokemon'
 import { Button } from '../../components'
 import colors from '../../styles/colors'
-
 import styles from './styles'
 
 export default ({ id, modalNotes, setModalNotes }) => {
