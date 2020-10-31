@@ -1,23 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import { useIsFocused } from '@react-navigation/native'
+import React, { useState, useEffect } from 'react'
 import { Header } from '../../components'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import { getUserInLocalStorage } from '../../utils'
+import {
+  getUserInLocalStorage,
+  loadPokemonsCaptured,
+  loadPokemonsVisited,
+} from '../../utils'
 import { useLanding } from '../../contexts'
-import styles from './styles'
 import colors from '../../styles/colors'
+import styles from './styles'
 
 export default () => {
-  const isFocused = useIsFocused()
   const { check, showLanding } = useLanding()
   const [user, setUser] = useState({})
+  const [pokemonsCaptured, setPokemosCaptured] = useState('')
+  const [pokemonsVisited, setPokemosVisited] = useState('')
 
   async function loadUserProfile() {
     setUser(await getUserInLocalStorage())
   }
 
   useEffect(() => {
+    async function pokemonsLength() {
+      const captured = await loadPokemonsCaptured()
+      const visited = await loadPokemonsVisited()
+      setPokemosCaptured(captured.length)
+      setPokemosVisited(visited.length ?? '0')
+    }
+
     loadUserProfile()
+    pokemonsLength()
   }, [])
 
   async function toggleCheck() {
@@ -26,7 +38,7 @@ export default () => {
 
   return (
     <styles.ProfileContainer>
-      {isFocused && user && (
+      {user && (
         <>
           <Header />
           <styles.TitleSession>Profile</styles.TitleSession>
@@ -42,10 +54,23 @@ export default () => {
             </styles.InfoContainer>
           </styles.BodyContainer>
 
-          <styles.AddInfoButton>
-            <styles.TextAddInfo>Add more information</styles.TextAddInfo>
-            <Icon name="plus" size={28} color={colors.dark} />
-          </styles.AddInfoButton>
+          <styles.BodyContainer>
+            <styles.InfoContainer>
+              <styles.LabelInfoText>Pokemons visited</styles.LabelInfoText>
+              <styles.ValueInfoText>
+                {pokemonsVisited} visited
+              </styles.ValueInfoText>
+            </styles.InfoContainer>
+          </styles.BodyContainer>
+
+          <styles.BodyContainer>
+            <styles.InfoContainer>
+              <styles.LabelInfoText>Pokemons captured</styles.LabelInfoText>
+              <styles.ValueInfoText>
+                {pokemonsCaptured} captured
+              </styles.ValueInfoText>
+            </styles.InfoContainer>
+          </styles.BodyContainer>
 
           <styles.ShowLandingContainer>
             <styles.TextLanding>Show me lading page</styles.TextLanding>

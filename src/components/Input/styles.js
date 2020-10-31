@@ -21,20 +21,7 @@ const Input = styled.TextInput`
   margin-bottom: 15px;
 `
 
-const ImageContainer = styled.View`
-  width: 56px;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-`
-
-const InputIcon = styled.Image`
-  opacity: 0.4;
-`
-
 export default {
   InputContainer,
   Input,
-  ImageContainer,
-  InputIcon,
 }

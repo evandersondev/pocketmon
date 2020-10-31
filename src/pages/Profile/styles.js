@@ -62,7 +62,8 @@ const TextAddInfo = styled.Text`
 const ShowLandingContainer = styled.View`
   width: 100%;
   flex-direction: row;
-  margin: 30px 0;
+  margin-top: auto;
+  margin-bottom: 30px;
   justify-content: center;
   align-items: center;
 `

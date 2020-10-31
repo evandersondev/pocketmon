@@ -30,6 +30,10 @@ function filterByCaptured(array) {
   return array.filter(pokemon => pokemon?.markAs === 'captured')
 }
 
+function filterByVisited(array) {
+  return array.filter(pokemon => pokemon?.markAs === 'visited')
+}
+
 async function saveInStorage(key, data) {
   await AsyncStorage.setItem(key, JSON.stringify(data))
 }
@@ -47,7 +51,7 @@ export async function saveDataPokedex(data) {
         ...filterPokemonById[0],
         markAs: data.markAs,
         notes:
-          data.markAs === 'none'
+          data.markAs === 'none' || data.markAs === 'visited'
             ? {
                 enable: false,
                 feed: {
@@ -110,6 +114,19 @@ export async function loadPokemonsCaptured() {
   const filterPokemonsCaptured = filterByCaptured(parsePokedex)
 
   return filterPokemonsCaptured.sort() || []
+}
+
+export async function loadPokemonsVisited() {
+  const pokedexStorage = await getPokedexInStorage('pokedex')
+
+  if (!pokedexStorage) {
+    return []
+  }
+  const parsePokedex = parseJson(pokedexStorage)
+
+  const filterPokemonsVisited = filterByVisited(parsePokedex)
+
+  return filterPokemonsVisited.sort() || []
 }
 
 export async function removeDataInStorage(key) {
