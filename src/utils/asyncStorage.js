@@ -98,10 +98,6 @@ export async function removeDataInStorage(key) {
   await AsyncStorage.removeItem(key)
 }
 
-export async function saveUserInLocalStorage(data) {
-  await saveInStorage('user', data)
-}
-
 export async function getUserInLocalStorage() {
   const user = parseJson(await AsyncStorage.getItem('user'))
   return user

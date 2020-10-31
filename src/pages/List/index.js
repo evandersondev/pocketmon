@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigation, useIsFocused } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
-import { usePokemon } from '../../context'
+import { usePokemon } from '../../contexts'
 import { Header, Card } from '../../components'
 import styles from './styles'
 
 export default () => {
-  const { pokemons, listPokemon, setPokemons, listPokemonById } = usePokemon()
+  const { pokemons, listPokemon, listPokemonById } = usePokemon()
   const [refreshing] = useState(false)
   const isFocused = useIsFocused()
   const { navigate } = useNavigation()

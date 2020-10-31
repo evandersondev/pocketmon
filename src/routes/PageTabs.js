@@ -1,14 +1,14 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import colors from '../styles/colors'
 import List from '../pages/List'
 import Pokedex from '../pages/Pokedex'
 import Profile from '../pages/Profile'
+import colors from '../styles/colors'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
-function PageTabs() {
+export default () => {
   return (
     <Navigator
       tabBarOptions={{
@@ -68,5 +68,3 @@ function PageTabs() {
     </Navigator>
   )
 }
-
-export default PageTabs

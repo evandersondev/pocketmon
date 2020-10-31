@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { Platform, StatusBar } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import { usePokemon } from '../../context/Pokemon'
+import { usePokemon, useModal } from '../../contexts'
 import { heightInCm, weightInKg } from '../../utils'
-import { useModal } from '../../context/Modal'
 import { ProgressBar, Modal, Notes } from '../../components'
 import { images } from '../../assets'
-import styles from './styles'
 import colors from '../../styles/colors'
+import styles from './styles'
 
 export default () => {
   const { goBack } = useNavigation()

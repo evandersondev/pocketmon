@@ -4,7 +4,7 @@ import { chekMarkedAs, loadPokemonsCapturedByid } from '../utils'
 
 const PokemonContext = createContext()
 
-export default function PokemonProvider({ children }) {
+export function PokemonProvider({ children }) {
   const [markedAs, setMarkedAs] = useState('')
   const [pokemons, setPokemons] = useState([])
   const [pokemon, setPokemon] = useState({

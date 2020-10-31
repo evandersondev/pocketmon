@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
 import { View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { AppLoading } from 'expo'
@@ -9,10 +10,8 @@ import {
   useFonts,
 } from '@expo-google-fonts/nunito'
 
-import AppStack from './src/routes/AppStack'
-import PokemonProvider from './src/context/Pokemon'
-import ModalProvider from './src/context/Modal'
-import LoadingProvider from './src/context/Loading'
+import Routes from './src/routes'
+import { PokemonProvider, ModalProvider, AuthProvider } from './src/contexts'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,16 +25,18 @@ export default function App() {
   }
 
   return (
-    <LoadingProvider>
-      <PokemonProvider>
-        <ModalProvider>
-          <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
-            <AppStack />
+    <PokemonProvider>
+      <ModalProvider>
+        <View style={{ flex: 1, backgroundColor: '#f1f2f6' }}>
+          <NavigationContainer>
+            <AuthProvider>
+              <Routes />
+            </AuthProvider>
+          </NavigationContainer>
 
-            <StatusBar style="dark-content" backgroundColor="transparent" />
-          </View>
-        </ModalProvider>
-      </PokemonProvider>
-    </LoadingProvider>
+          <StatusBar style="dark-content" backgroundColor="transparent" />
+        </View>
+      </ModalProvider>
+    </PokemonProvider>
   )
 }

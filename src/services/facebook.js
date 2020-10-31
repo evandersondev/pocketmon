@@ -1,5 +1,4 @@
 import * as Facebook from 'expo-facebook'
-
 export async function signUpFacebook() {
   try {
     await Facebook.initializeAsync({
@@ -18,19 +17,16 @@ export async function signUpFacebook() {
       const results = await response.json()
 
       const user = {
-        id: results.id,
-        image: results.picture.data.url,
         token,
-        info: [
-          {
-            name: results.name,
-          },
-        ],
+        user: {
+          id: results.id,
+          name: results.name,
+          image: results.picture.data.url,
+        },
       }
 
       return user
     } else {
-      return {}
     }
   } catch ({ message }) {
     alert(`Facebook Login Error: ${message}`)

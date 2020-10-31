@@ -1,20 +1,14 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { facebook } from '../../services'
-import { saveUserInLocalStorage } from '../../utils/asyncStorage'
+import { useAuth } from '../../contexts'
 import { images } from '../../assets'
 import { Button } from '../../components'
 import styles from './styles'
 
 export default () => {
-  const { navigate } = useNavigation()
+  const { signIn } = useAuth()
 
   async function handleSubmit() {
-    const results = await facebook.signUpFacebook()
-    if (results) {
-      await saveUserInLocalStorage({ ...results })
-      navigate('PageTabs')
-    }
+    await signIn()
   }
 
   return (

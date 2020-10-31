@@ -1,9 +1,8 @@
 import React from 'react'
 import { MaterialCommunityIcons as Icon } from 'expo-vector-icons'
-import { usePokemon } from '../../context/Pokemon'
+import { usePokemon, useModal } from '../../contexts'
 import { saveDataPokedex } from '../../utils'
 import { Modal } from 'react-native'
-import { useModal } from '../../context/Modal'
 import colors from '../../styles/colors'
 import styles from './styles'
 

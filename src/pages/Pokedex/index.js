@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
-import {
-  useNavigation,
-  useFocusEffect,
-  useIsFocused,
-} from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { loadPokemonsCaptured } from '../../utils'
-import { usePokemon } from '../../context/Pokemon'
+import { usePokemon } from '../../contexts'
 import { Header, Card } from '../../components'
 import { RectButton } from 'react-native-gesture-handler'
 import styles from './styles'

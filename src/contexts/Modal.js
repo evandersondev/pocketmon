@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react'
 
 const ModalContext = createContext()
 
-export default function ModalProvider({ children }) {
+export function ModalProvider({ children }) {
   const [modal, setModal] = useState({
     enable: false,
   })
