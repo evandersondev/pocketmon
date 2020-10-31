@@ -33,9 +33,9 @@ export default ({ id, modalNotes, setModalNotes }) => {
     setModalNotes(false)
   }
 
-  return (
-    <Modal transparent={true} visible={modalNotes}>
-      {isFocused && id && (
+  {
+    isFocused && id && (
+      <Modal transparent={true} visible={modalNotes}>
         <styles.NotesContainer>
           <styles.NotesHeader>
             <styles.CloseNotesButton onPress={closeNotes}>
@@ -192,7 +192,7 @@ export default ({ id, modalNotes, setModalNotes }) => {
             </styles.NotesBody>
           </styles.ScrollContainer>
         </styles.NotesContainer>
-      )}
-    </Modal>
-  )
+      </Modal>
+    )
+  }
 }

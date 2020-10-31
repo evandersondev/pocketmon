@@ -14,7 +14,6 @@ export function AuthProvider({ children }) {
 
       if (storageUser && storageToken) {
         setUser(JSON.parse(storageUser))
-        setLoading(false)
       }
     }
     loadStorageData()
