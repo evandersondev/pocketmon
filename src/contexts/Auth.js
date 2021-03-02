@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
-import { facebook } from '../services'
+// import { facebook } from '../services'
+import axios from 'axios'
 
 const AuthContext = createContext()
 
@@ -19,11 +20,27 @@ export function AuthProvider({ children }) {
     loadStorageData()
   }, [])
 
-  async function signIn() {
-    const { token, user } = await facebook.signUpFacebook()
+  async function signIn(username) {
+    if (username === '') return
+
+    const {
+      data: { id, name, avatar_url, login },
+    } = await axios.get(`https://api.github.com/users/${username}`)
+
+    if (!login) return
+
+    const user = {
+      id,
+      name,
+      image: avatar_url,
+      usernme: login,
+    }
+
+    // const { token, user } = await facebook.signUpFacebook()
+
     setUser(user)
     await AsyncStorage.setItem('@PMON:user', JSON.stringify(user))
-    await AsyncStorage.setItem('@PMON:token', token)
+    // await AsyncStorage.setItem('@PMON:token', token)
   }
 
   async function SignOut() {

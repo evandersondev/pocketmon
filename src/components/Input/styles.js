@@ -16,7 +16,7 @@ const Input = styled.TextInput`
   width: 100%;
   height: 100%;
   color: ${colors.dark};
-  padding: 0 15px 0 0px;
+  padding: 0 0 0 30px;
   border-radius: 8px;
   margin-bottom: 15px;
 `

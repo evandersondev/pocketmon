@@ -2,7 +2,7 @@
   "expo": {
     "name": "Pocketmon",
     "slug": "Pocketmon",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "privacy": "public",
     "orientation": "portrait",
     "platforms": ["android"],
@@ -15,14 +15,18 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.evandersondev.pocketmon",
+      "adaptiveIcon": {
+        "backgroundColor": "#FF6348"
+      }
     }
   }
 }

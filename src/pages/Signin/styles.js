@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 
-const Container = styled.SafeAreaView`
+const Container = styled.ScrollView`
   flex: 1;
   background-color: ${colors.ligth};
   align-items: center;

@@ -15,13 +15,13 @@ export default () => {
   const { pokemon, markedAs, notes, loadNotesInStorage } = usePokemon()
   const [modalNotes, setModalNotes] = useState(false)
 
-  async function loadStorage() {
-    await loadNotesInStorage(pokemon.id)
-  }
-
   useEffect(() => {
     loadStorage()
   }, [modalNotes])
+
+  async function loadStorage() {
+    await loadNotesInStorage(pokemon.id)
+  }
 
   return (
     <>

@@ -17,6 +17,7 @@ export default () => {
   const [pokemonsVisited, setPokemosVisited] = useState('')
 
   async function loadUserProfile() {
+    console.log(await getUserInLocalStorage())
     setUser(await getUserInLocalStorage())
   }
 

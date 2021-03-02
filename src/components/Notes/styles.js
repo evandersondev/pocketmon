@@ -8,6 +8,7 @@ const NotesContainer = styled.View`
   background: ${colors.ligth};
   border-radius: 50px;
   padding: 0 30px;
+  elevation: 2;
 `
 
 const ScrollContainer = styled.ScrollView``

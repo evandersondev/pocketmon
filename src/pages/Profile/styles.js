@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 
-const ProfileContainer = styled.View`
+const ProfileContainer = styled.ScrollView`
   padding: 0 30px;
   flex: 1;
   background: ${colors.ligth};
