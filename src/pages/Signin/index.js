@@ -3,7 +3,10 @@ import { KeyboardAvoidingView } from 'react-native'
 import { useAuth } from '../../contexts'
 import { images } from '../../assets'
 import { Button, Input } from '../../components'
+
 import styles from './styles'
+
+const app = require('../../../app.json')
 
 export default () => {
   const { signIn } = useAuth()
@@ -36,7 +39,9 @@ export default () => {
       </styles.Form>
 
       <styles.VersionInfoContainer>
-        <styles.VersionInfoText>version 1.0.1</styles.VersionInfoText>
+        <styles.VersionInfoText>
+          version {app.expo.version}
+        </styles.VersionInfoText>
       </styles.VersionInfoContainer>
     </styles.Container>
   )

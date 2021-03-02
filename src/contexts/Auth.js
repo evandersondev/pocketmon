@@ -11,9 +11,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     async function loadStorageData() {
       const storageUser = await AsyncStorage.getItem('@PMON:user')
-      const storageToken = await AsyncStorage.getItem('@PMON:token')
+      // const storageToken = await AsyncStorage.getItem('@PMON:token')
 
-      if (storageUser && storageToken) {
+      if (storageUser) {
         setUser(JSON.parse(storageUser))
       }
     }

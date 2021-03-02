@@ -1,22 +1,31 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { View } from 'react-native'
 import { shouldToShowLading, checkIfShowLandingInStorage } from '../utils'
 
 const LandingContext = createContext()
 
 export function LandingProvider({ children }) {
   const [check, setCheck] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   async function showLanding() {
     setCheck(!check)
     await shouldToShowLading(!check)
   }
 
+  async function loadCheck() {
+    setLoading(true)
+    setCheck(await checkIfShowLandingInStorage())
+    setLoading(false)
+  }
+
   useEffect(() => {
-    async function loadCheck() {
-      setCheck(await checkIfShowLandingInStorage())
-    }
     loadCheck()
   }, [])
+
+  if (loading) {
+    return <View />
+  }
 
   return (
     <LandingContext.Provider value={{ check, showLanding }}>
